@@ -1,11 +1,13 @@
 {
   "nav_bar": {
+    "Announcement": "Free Shipping on Orders Over 1000$",
     "Profile": "Profile",
     "Profile_Settings": "Profile Settings",
     "Favorites": "Favorites",
     "Terrace_Clogs": "Terrace Clogs",
     "Accessories": "Accessories",
-    "Shop_All": "Shop All"
+    "Shop_All": "Shop All",
+    "Values": "Values"
   },
   "button": {
     "save": "save"

@@ -1,11 +1,13 @@
 {
   "nav_bar": {
+    "Announcement": "شحن مجاني علي أي طلب بأكثر من 1000 جنيه",
     "Profile": "الحساب الشخصي",
     "Profile_Settings": "اعدادات الحساب",
     "Favorites": "المفضله",
     "Terrace_Clogs": "الأحذيه الخفيفه",
     "Accessories": "منتجات متنوعه",
-    "Shop_All": "تسوق من الكل"
+    "Shop_All": "تسوق من الكل",
+    "Values": "عن الشركه"
   },
   "button": {
     "save": "حفظ"

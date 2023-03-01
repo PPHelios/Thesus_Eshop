@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Link from "@mui/material/Link";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,19 +15,21 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import Collapse from "@mui/material/Collapse";
 import Stack from "@mui/material/Stack";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import Popover from "@mui/material/Popover";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
-function DrawerAppBar() {
+function Navbar() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [listDrawerOpen, setListDrawerOpen] = useState(false);
-  const [profileDrawerOpen, setProfileDrawerOpen] = useState(false);
+  const [profilePopoverOpen, setProfilePopoverOpen] = useState(null);
+
+  const { t, i18n } = useTranslation("common");
 
   const handleMenuDrawerToggle = () => {
     setMobileDrawerOpen((prevState) => !prevState);
@@ -35,9 +38,14 @@ function DrawerAppBar() {
     setListDrawerOpen((prevState) => !prevState);
   };
 
-  const handleProfileDrawerToggle = () => {
-    setProfileDrawerOpen((prevState) => !prevState);
+  const handleProfileButtonClick = (event) => {
+    setProfilePopoverOpen(event.currentTarget);
   };
+  const handleProfilePopoverClose = () => {
+    setProfilePopoverOpen(null);
+  };
+  const open = Boolean(profilePopoverOpen);
+  const id = open ? "profile settings menu" : undefined;
   const drawerWidth = 240;
 
   const navLinks = [
@@ -56,38 +64,39 @@ function DrawerAppBar() {
   ];
 
   const navItems = navLinks.map((item) => {
-    const menuItems = item?.links?.map((item) => (
-      <ListItem button component={Link} to={item.link} sx={{ pl: 4 }}>
-        <ListItemText primary={item.label} disablePadding />
+    const menuItems = item?.links?.map((subItem) => (
+      <ListItem
+        key={subItem.label}
+        button
+        component={Link}
+        to={subItem.link}
+        href="#"
+        sx={{ pl: 4 }}
+      >
+        <ListItemText primary={t(`nav_bar.${subItem.label}`)} />
       </ListItem>
     ));
     if (menuItems) {
       return (
-        <>
-          <ListItem key={item} disablePadding>
-            <ListItemButton
-              onClick={handleListDrawerToggle}
-              height="20"
-              backgroundColor="red"
-            >
-              <ListItemText primary={item.label} disablePadding />
+        <Box key={item.label}>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleListDrawerToggle} height="20">
+              <ListItemText primary={t(`nav_bar.${item.label}`)} />
               {listDrawerOpen ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </ListItem>
           {!listDrawerOpen && <Divider />}
           <Collapse in={listDrawerOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {menuItems}
-            </List>
+            <List component="div">{menuItems}</List>
             <Divider />
           </Collapse>
-        </>
+        </Box>
       );
     }
     return (
-      <ListItem key={item} disablePadding>
+      <ListItem key={item.label} disablePadding>
         <ListItemButton sx={{ textAlign: "center" }}>
-          <ListItemText primary={item.label} />
+          <ListItemText primary={t(`nav_bar.${item.label}`)} />
         </ListItemButton>
       </ListItem>
     );
@@ -134,7 +143,7 @@ function DrawerAppBar() {
           }}
         >
           <Typography align="center" variant="h5" component="p">
-            Free Shipping on Orders Over 100$
+            {t("nav_bar.Announcement")}
           </Typography>
         </Stack>
         {/**************** Navbar ****************/}
@@ -167,28 +176,76 @@ function DrawerAppBar() {
           {/**************** Nav Menu ****************/}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navLinks.map((item) => (
-              <Button sx={{ color: "green.dark" }} to={item.link}>
-                {item.label}
+              <Button
+                key={item.label}
+                sx={{ color: "green.dark" }}
+                to={item.link}
+                href="#"
+              >
+                {t(`nav_bar.${item.label}`)}
               </Button>
             ))}
           </Box>
           {/**************** Profile Bar ****************/}
           <Box sx={{ display: "flex", flexGrow: 0, flexDirection: "row" }}>
-            <Tooltip title="Open settings">
-              <IconButton
-                color="inherit"
-                aria-label="open profile drawer"
-                edge="end"
-                onClick={handleProfileDrawerToggle}
+            <IconButton
+              color="inherit"
+              aria-describedby={id}
+              onClick={handleProfileButtonClick}
+              sx={{
+                p: 0,
+                marginRight: 3,
+                display: { xs: "none", sm: "block" },
+              }}
+            >
+              <AccountCircleOutlinedIcon />
+            </IconButton>
+            {/*********** Profile Bar Popover *************/}
+            <Popover
+              id={id}
+              open={open}
+              // anchorReference="anchorPosition"
+              // anchorPosition={{ top: 70, left: 0 }}
+              anchorEl={profilePopoverOpen}
+              onClose={handleProfilePopoverClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+            >
+              <Stack
                 sx={{
-                  p: 0,
-                  marginRight: 3,
-                  display: { xs: "none", sm: "block" },
+                  p: 2,
+                  bgcolor: "pink.main",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
                 }}
               >
-                <AccountCircleOutlinedIcon />
-              </IconButton>
-            </Tooltip>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                    pb: 3,
+                  }}
+                >
+                  <LanguageSwitcher
+                    closeProfilePopover={handleProfilePopoverClose}
+                  />
+                  <ThemeToggler />
+                </Box>
+                <Divider />
+                <List>
+                  <ListItem button component={Link} to={"/"} href="#">
+                    <ListItemText primary={t(`nav_bar.Profile_Settings`)} />
+                  </ListItem>
+                  <ListItem button component={Link} to={"/"} href="#">
+                    <ListItemText primary={t(`nav_bar.Favorites`)} />
+                  </ListItem>
+                </List>
+              </Stack>
+            </Popover>
           </Box>
         </Toolbar>
       </AppBar>
@@ -210,20 +267,22 @@ function DrawerAppBar() {
           }}
         >
           <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={{
+              width: "100%",
+              height: "100%",
+              maxWidth: 360,
+              bgcolor: "pink.main",
+              paddingTop: 5,
+            }}
             component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-              <ListSubheader component="div" id="nested-list-subheader">
-                Nested List Items
-              </ListSubheader>
-            }
+            aria-labelledby="nested-list"
           >
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "space-evenly",
                 alignItems: "center",
+                pb: 3,
               }}
             >
               <LanguageSwitcher />
@@ -232,28 +291,9 @@ function DrawerAppBar() {
             {navItems}
           </List>
         </Drawer>
-        {/***** Profile Drawer *****/}
-        <Drawer
-          variant="persistent"
-          anchor="right"
-          open={profileDrawerOpen}
-          onClose={handleProfileDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {navItems}
-        </Drawer>
       </Box>
     </Box>
   );
 }
 
-export default DrawerAppBar;
+export default Navbar;
