@@ -1,3 +1,13 @@
 {
-  "save": "save"
+  "nav_bar": {
+    "Profile": "Profile",
+    "Profile_Settings": "Profile Settings",
+    "Favorites": "Favorites",
+    "Terrace_Clogs": "Terrace Clogs",
+    "Accessories": "Accessories",
+    "Shop_All": "Shop All"
+  },
+  "button": {
+    "save": "save"
+  }
 }

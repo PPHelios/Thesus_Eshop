@@ -1,5 +1,5 @@
 import "./App.css";
-import { Suspense, useCallback, useEffect, useMemo } from "react";
+import { Suspense, useCallback, useEffect, useMemo, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Route,
@@ -7,10 +7,35 @@ import {
   RouterProvider,
   createRoutesFromElements,
 } from "react-router-dom";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from "react-router-dom";
+import PropTypes from "prop-types";
+import { LinkProps } from "@mui/material/Link";
 import MainLayout from "./layouts/MainLayout";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useStore } from "./store/useStore";
+
+const LinkBehavior = forwardRef((props, ref) => {
+  const { href, ...other } = props;
+  // Map href (MUI) -> to (react-router)
+  return (
+    <RouterLink data-testid="custom-link" ref={ref} to={href} {...other} />
+  );
+});
+
+LinkBehavior.propTypes = {
+  href: PropTypes.oneOfType([
+    PropTypes.shape({
+      hash: PropTypes.string,
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+    }),
+    PropTypes.string,
+  ]).isRequired,
+};
 
 function App() {
   const colorMode = useStore((state) => state.user.theme);
@@ -57,6 +82,18 @@ function App() {
               //   secondary: grey[500],
               // },
             }),
+      },
+      components: {
+        MuiLink: {
+          defaultProps: {
+            component: LinkBehavior,
+          },
+        },
+        MuiButtonBase: {
+          defaultProps: {
+            LinkComponent: LinkBehavior,
+          },
+        },
       },
     }),
     [colorMode]

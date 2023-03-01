@@ -1,3 +1,13 @@
 {
-  "save": "حفظ"
+  "nav_bar": {
+    "Profile": "الحساب الشخصي",
+    "Profile_Settings": "اعدادات الحساب",
+    "Favorites": "المفضله",
+    "Terrace_Clogs": "الأحذيه الخفيفه",
+    "Accessories": "منتجات متنوعه",
+    "Shop_All": "تسوق من الكل"
+  },
+  "button": {
+    "save": "حفظ"
+  }
 }

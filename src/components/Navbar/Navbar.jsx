@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "@mui/material/Link";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -8,37 +9,118 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
+import Collapse from "@mui/material/Collapse";
 import Stack from "@mui/material/Stack";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
-
-const drawerWidth = 240;
-const navItems = [
-  "Profile",
-  "Terrace Clogs",
-  "Accessories",
-  "Shop All",
-  "Values",
-];
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
 function DrawerAppBar() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
-
+  const [listDrawerOpen, setListDrawerOpen] = useState(false);
   const [profileDrawerOpen, setProfileDrawerOpen] = useState(false);
 
   const handleMenuDrawerToggle = () => {
     setMobileDrawerOpen((prevState) => !prevState);
   };
+  const handleListDrawerToggle = () => {
+    setListDrawerOpen((prevState) => !prevState);
+  };
 
   const handleProfileDrawerToggle = () => {
     setProfileDrawerOpen((prevState) => !prevState);
   };
+  const drawerWidth = 240;
 
+  const navLinks = [
+    {
+      link: "Profile",
+      label: "Profile",
+      links: [
+        { link: "Men", label: "Profile_Settings", icon: "" },
+        { link: "Women", label: "Favorites", icon: "" },
+      ],
+    },
+    { link: "Terrace Clogs", label: "Terrace_Clogs" },
+    { link: "Accessories", label: "Accessories" },
+    { link: "Shop All", label: "Shop_All" },
+    { link: "Values", label: "Values" },
+  ];
+
+  const navItems = navLinks.map((item) => {
+    const menuItems = item?.links?.map((item) => (
+      <ListItem button component={Link} to={item.link} sx={{ pl: 4 }}>
+        <ListItemText primary={item.label} disablePadding />
+      </ListItem>
+    ));
+    if (menuItems) {
+      return (
+        <>
+          <ListItem key={item} disablePadding>
+            <ListItemButton
+              onClick={handleListDrawerToggle}
+              height="20"
+              backgroundColor="red"
+            >
+              <ListItemText primary={item.label} disablePadding />
+              {listDrawerOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+          </ListItem>
+          {!listDrawerOpen && <Divider />}
+          <Collapse in={listDrawerOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {menuItems}
+            </List>
+            <Divider />
+          </Collapse>
+        </>
+      );
+    }
+    return (
+      <ListItem key={item} disablePadding>
+        <ListItemButton sx={{ textAlign: "center" }}>
+          <ListItemText primary={item.label} />
+        </ListItemButton>
+      </ListItem>
+    );
+  });
+
+  // const menuDrawer = (
+  //   <Box onClick={handleMenuDrawerToggle} sx={{ textAlign: "center" }}>
+  //     <Typography variant="h6" sx={{ my: 2 }}>
+  //       NONA SHOP
+  //     </Typography>
+  //     <Divider />
+  //     <List></List>
+  //   </Box>
+  // );
+  // const profileDrawer = (
+  //   <Box onClick={handleProfileDrawerToggle} sx={{ textAlign: "center" }}>
+  //     <Typography variant="h6" sx={{ my: 2 }}>
+  //       NONA SHOP2
+  //     </Typography>
+  //     <Divider />
+  //     <ThemeToggler />
+  //     <Divider />
+  //     <List>
+  //       {navItems.map((item) => (
+  //         <ListItem key={item} disablePadding>
+  //           <ListItemButton sx={{ textAlign: "center" }}>
+  //             <ListItemText primary={item} />
+  //           </ListItemButton>
+  //         </ListItem>
+  //       ))}
+  //     </List>
+  //   </Box>
+  // );
   return (
     <Box>
       <AppBar component="nav">
@@ -82,11 +164,11 @@ function DrawerAppBar() {
             alt="company logo"
             width="100"
           />
-          {/**************** Nav MEnu ****************/}
+          {/**************** Nav Menu ****************/}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "green.dark" }}>
-                {item}
+            {navLinks.map((item) => (
+              <Button sx={{ color: "green.dark" }} to={item.link}>
+                {item.label}
               </Button>
             ))}
           </Box>
@@ -111,7 +193,7 @@ function DrawerAppBar() {
         </Toolbar>
       </AppBar>
       <Box component="nav">
-        {/***** Menu Drawer *****/}
+        {/***** Hamburger Menu Drawer *****/}
         <Drawer
           variant="temporary"
           open={mobileDrawerOpen}
@@ -127,7 +209,28 @@ function DrawerAppBar() {
             },
           }}
         >
-          {menuDrawer}
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+            subheader={
+              <ListSubheader component="div" id="nested-list-subheader">
+                Nested List Items
+              </ListSubheader>
+            }
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <LanguageSwitcher />
+              <ThemeToggler />
+            </Box>
+            {navItems}
+          </List>
         </Drawer>
         {/***** Profile Drawer *****/}
         <Drawer
@@ -146,7 +249,7 @@ function DrawerAppBar() {
             },
           }}
         >
-          {profileDrawer}
+          {navItems}
         </Drawer>
       </Box>
     </Box>
