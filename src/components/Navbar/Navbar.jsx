@@ -10,7 +10,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -21,6 +20,8 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Popover from "@mui/material/Popover";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
@@ -171,14 +172,16 @@ function Navbar() {
           <img
             src={require("../../assets/images/Thesus_logo.webp")}
             alt="company logo"
-            width="100"
+            width="90"
           />
           {/**************** Nav Menu ****************/}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navLinks.map((item) => (
               <Button
                 key={item.label}
-                sx={{ color: "green.dark" }}
+                sx={{
+                  color: "green.dark",
+                }}
                 to={item.link}
                 href="#"
               >
@@ -187,18 +190,38 @@ function Navbar() {
             ))}
           </Box>
           {/**************** Profile Bar ****************/}
-          <Box sx={{ display: "flex", flexGrow: 0, flexDirection: "row" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexGrow: 0,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "stretch",
+              alignSelf: "stretch",
+              gap: 1,
+            }}
+          >
+            <IconButton color="inherit" sx={{ p: 0 }} aria-label="search">
+              <SearchOutlinedIcon />
+            </IconButton>
             <IconButton
+              color="inherit"
+              sx={{ p: 0 }}
+              aria-label="shopping cart"
+            >
+              <ShoppingBagOutlinedIcon />
+            </IconButton>
+            <IconButton
+              aria-label="profile menu"
               color="inherit"
               aria-describedby={id}
               onClick={handleProfileButtonClick}
               sx={{
                 p: 0,
-                marginRight: 3,
                 display: { xs: "none", sm: "block" },
               }}
             >
-              <AccountCircleOutlinedIcon />
+              <AccountCircleOutlinedIcon viewBox="0 0 24 19" />
             </IconButton>
             {/*********** Profile Bar Popover *************/}
             <Popover

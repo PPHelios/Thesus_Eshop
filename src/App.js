@@ -12,11 +12,15 @@ import {
   LinkProps as RouterLinkProps,
 } from "react-router-dom";
 import PropTypes from "prop-types";
-import { LinkProps } from "@mui/material/Link";
 import MainLayout from "./layouts/MainLayout";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  ThemeProvider,
+  createTheme,
+  responsiveFontSizes,
+} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useStore } from "./store/useStore";
+import HomePage from "./features/homePage/HomePage";
 
 const LinkBehavior = forwardRef((props, ref) => {
   const { href, ...other } = props;
@@ -39,8 +43,17 @@ LinkBehavior.propTypes = {
 
 function App() {
   const colorMode = useStore((state) => state.user.theme);
-  const theme = useCallback(
+  let theme = useCallback(
     createTheme({
+      breakpoints: {
+        values: {
+          xs: 0,
+          sm: 693,
+          md: 900,
+          lg: 1200,
+          xl: 1536,
+        },
+      },
       palette: {
         mode: colorMode,
         ...(colorMode === "light"
@@ -94,10 +107,27 @@ function App() {
             LinkComponent: LinkBehavior,
           },
         },
+        MuiButton: {
+          styleOverrides: {
+            root: ({ ownerState }) => ({
+              ...(ownerState.variant === "contained" &&
+                ownerState.color === "primary" && {
+                  backgroundColor: "#123026",
+                  color: "#fff",
+                  borderRadius: "15px",
+                  transition: "0.5s",
+                  "&:hover": {
+                    backgroundColor: `rgba(18, 48, 38 , 0.7)`,
+                  },
+                }),
+            }),
+          },
+        },
       },
     }),
     [colorMode]
   );
+  theme = responsiveFontSizes(theme);
   const { i18n } = useTranslation();
   useEffect(() => {
     document.dir = i18n.dir();
@@ -106,7 +136,9 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<MainLayout />} />
+        <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
       </>
     )
   );
