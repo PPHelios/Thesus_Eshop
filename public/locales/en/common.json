@@ -14,19 +14,18 @@
 "h1":"Comfy. Water Resistant. Unisex. Made with 96% Recycled and Natural Materials.",
 "newIn":"New In"
 "socially":"Socially and Environmentally Progressive Outdoor Footwear.",
-"madeOf1":"Socially and Environmentally Progressive Outdoor Footwear.
-Shop The Terrus Shop The Weekend Boot Thesus outdoor footwear is made from tough recycled nylon and natural rubber. They are versatile, comfy, durable and made with environmentally and socially progressive materials.",
+"madeOf1":"Shop The Terrus Shop The Weekend Boot Thesus outdoor footwear is made from tough recycled nylon and natural rubber. They are versatile, comfy, durable and made with environmentally and socially progressive materials.",
 "madeOf2":"Each pair diverts 1-2 Kg of waste from waterways and landfill, reduces 20 Kg of CO2 and conserves 10 L of water compared to your traditional leather boot.",
-"stayInTouch":"Let’s stay in touch. Get {{val, currency(USD)}} off your first purchase, early access to new releases and outdoor tips, trips and education.
+"stayInTouch":"Let’s stay in touch. Get {{val, currency(USD)}} off your first purchase, early access to new releases and outdoor tips, trips and education."
 }
   "button": {
-    "save": "Save"
+    "save": "Save",
 "addToCart":"Add To Cart",
 "shopNow":"Shop Now"
 
   }
 "product":{
 "name":"Name",
-"price":"{{val, currency(USD)}}"
+"price":"{{valUsd, currency(USD)}}"
 }
 }
