@@ -1,4 +1,3 @@
-import "./App.css";
 import { Suspense, useCallback, useEffect, useMemo, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -7,11 +6,20 @@ import {
   RouterProvider,
   createRoutesFromElements,
 } from "react-router-dom";
+
+// Changing mui Link component to react router Link
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
 } from "react-router-dom";
 import PropTypes from "prop-types";
+
+// Adding support for RTL
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+
 import MainLayout from "./layouts/MainLayout";
 import {
   ThemeProvider,
@@ -21,7 +29,7 @@ import {
 import CssBaseline from "@mui/material/CssBaseline";
 import { useStore } from "./store/useStore";
 import HomePage from "./features/homePage/HomePage";
-
+import Login from "./features/Authentication/Login";
 const LinkBehavior = forwardRef((props, ref) => {
   const { href, ...other } = props;
   // Map href (MUI) -> to (react-router)
@@ -45,6 +53,7 @@ function App() {
   const colorMode = useStore((state) => state.user.theme);
   let theme = useCallback(
     createTheme({
+      direction: "ltr", // Both here and <body dir="rtl">
       breakpoints: {
         values: {
           xs: 0,
@@ -74,27 +83,7 @@ function App() {
               //   secondary: grey[800],
               // },
             }
-          : {
-              // palette values for dark mode
-              // green: {
-              //   main: "#121212",
-              //   darker: "#121212",
-              //   contrastThreshold: 4.5,
-              // },
-              // pink: {
-              //   main: "#121212",
-              //   contrastThreshold: 4.5,
-              // },
-              // divider: deepOrange[700],
-              // background: {
-              //   default: deepOrange[900],
-              //   paper: deepOrange[900],
-              // },
-              // text: {
-              //   primary: "#fff",
-              //   secondary: grey[500],
-              // },
-            }),
+          : {}),
       },
       components: {
         MuiLink: {
@@ -110,7 +99,7 @@ function App() {
         MuiButton: {
           styleOverrides: {
             root: ({ ownerState }) => ({
-              ...(ownerState.variant === "contained" &&
+              ...(ownerState.variant === "store" &&
                 ownerState.color === "primary" && {
                   backgroundColor: "#123026",
                   color: "#fff",
@@ -129,6 +118,13 @@ function App() {
   );
   theme = responsiveFontSizes(theme);
   const { i18n } = useTranslation();
+
+  // Create rtl cache
+  const cacheRtl = createCache({
+    key: "muirtl",
+    stylisPlugins: [prefixer, rtlPlugin],
+  });
+
   useEffect(() => {
     document.dir = i18n.dir();
   }, [i18n, i18n.language]);
@@ -138,19 +134,22 @@ function App() {
       <>
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
         </Route>
       </>
     )
   );
   return (
-    <ThemeProvider theme={theme}>
-      <Suspense fallback="Loading...">
-        <>
-          <CssBaseline />
-          <RouterProvider router={router} />
-        </>
-      </Suspense>
-    </ThemeProvider>
+    <CacheProvider value={cacheRtl}>
+      <ThemeProvider theme={theme}>
+        <Suspense fallback="Loading...">
+          <>
+            <CssBaseline />
+            <RouterProvider router={router} />
+          </>
+        </Suspense>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
 

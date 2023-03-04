@@ -1,4 +1,5 @@
 import { styled } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -10,6 +11,7 @@ import Button from "@mui/material/Button";
 
 const Img = styled("img")({});
 function Hero() {
+  const { t } = useTranslation("common");
   return (
     <Box sx={{ position: "relative" }}>
       <Img
@@ -31,17 +33,15 @@ ${spring1380} 1380w`}
       />
       <Stack
         sx={{
-          width: { sm: "40%", lg: "30%" },
+          width: { sm: "50%", lg: "40%" },
           height: "100%",
-          py: "4vw",
-          pl: "2rem",
-          position: "absolute",
-          top: 0,
-          left: 0,
+          mt: "2rem",
+          px: "2rem",
+          position: { xs: "static", sm: "absolute" },
+          top: "10%",
           color: "green.dark",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          display: { xs: "none", sm: "flex" },
+          justifyContent: "flex-start",
+          gap: "3vw",
         }}
       >
         <Typography
@@ -50,15 +50,14 @@ ${spring1380} 1380w`}
           color="inherit"
           sx={{ fontWeight: 500 }}
         >
-          The New Collection is Here.
+          {t("home.newCollection")}
         </Typography>
         <Box>
           <Typography variant="h5" as="p" color="inherit">
-            Comfy. Water Resistant. Unisex. Made with 96% Recycled and Natural
-            Materials.
+            {t("home.hero")}
           </Typography>
-          <Button variant="contained" color="primary" sx={{ mt: "1rem" }}>
-            Shop Now
+          <Button variant="store" color="primary" sx={{ mt: "1rem" }}>
+            {t("button.shopNow")}
           </Button>
         </Box>
       </Stack>

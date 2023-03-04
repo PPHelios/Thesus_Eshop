@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ProductCard from "../../components/ProductCard/ProductCard";
@@ -7,27 +8,28 @@ const data = [
   {
     id: 0,
     name: "The Simone Weekend Boot",
-    price: 2000,
+    nameAr: "حذاء سيمون لعطله نهايه الاسبوع",
+    price: 65,
+    priceEgp: 2000,
     img: "boot1",
     alt: "Simone Weekend beige Boot with blue laces",
   },
   {
-    id: 0,
+    id: 1,
     name: "The Marlin Weekend Boot",
-    price: 2300,
+    nameAr: "حذاء مارلين لعطله نهايه الاسبوع",
+    price: 75,
+    priceEgp: 2300,
     img: "boot2",
     alt: "Marlin Weekend blue Boot with orange laces",
   },
 ];
 function NewIn() {
+  const { t } = useTranslation("common");
   return (
-    <Box as="section">
-      <Typography
-        variant="h3"
-        as="h3"
-        sx={{ mx: "auto", my: 2, pl: 2, textAlign: "left" }}
-      >
-        New In
+    <Box as="section" mt="2rem">
+      <Typography variant="h3" as="h3" sx={{ mx: "auto", my: 2, pl: 2 }}>
+        {t("home.newIn")}
       </Typography>
       <Stack
         direction={{ xs: "column", sm: "row" }}
@@ -35,11 +37,12 @@ function NewIn() {
         sx={{
           maxWidth: { xs: "96%", sm: "86%" },
           mx: "auto",
+          mt: "2rem",
           justifyContent: "center",
         }}
       >
         {data.map((item) => (
-          <ProductCard item={item} />
+          <ProductCard item={item} key={item.id} />
         ))}
       </Stack>
     </Box>

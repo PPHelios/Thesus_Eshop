@@ -32,8 +32,8 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    ns: ["translation", "common", "validation", "glossary"],
-    defaultNS: "translation",
+    // ns: ["translation", "common", "validation", "glossary"], // To load all name spaces on every page
+    // defaultNS: "common", // to be loaded on every page
 
     // lng: "en", // Default language will be Arabic
     //  resources, // to load resources from const resources locally

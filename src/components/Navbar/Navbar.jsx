@@ -58,6 +58,7 @@ function Navbar() {
         { link: "Women", label: "Favorites", icon: "" },
       ],
     },
+    { link: "Terrace Clogs", label: "weekendBoots" },
     { link: "Terrace Clogs", label: "Terrace_Clogs" },
     { link: "Accessories", label: "Accessories" },
     { link: "Shop All", label: "Shop_All" },
@@ -103,34 +104,6 @@ function Navbar() {
     );
   });
 
-  // const menuDrawer = (
-  //   <Box onClick={handleMenuDrawerToggle} sx={{ textAlign: "center" }}>
-  //     <Typography variant="h6" sx={{ my: 2 }}>
-  //       NONA SHOP
-  //     </Typography>
-  //     <Divider />
-  //     <List></List>
-  //   </Box>
-  // );
-  // const profileDrawer = (
-  //   <Box onClick={handleProfileDrawerToggle} sx={{ textAlign: "center" }}>
-  //     <Typography variant="h6" sx={{ my: 2 }}>
-  //       NONA SHOP2
-  //     </Typography>
-  //     <Divider />
-  //     <ThemeToggler />
-  //     <Divider />
-  //     <List>
-  //       {navItems.map((item) => (
-  //         <ListItem key={item} disablePadding>
-  //           <ListItemButton sx={{ textAlign: "center" }}>
-  //             <ListItemText primary={item} />
-  //           </ListItemButton>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   </Box>
-  // );
   return (
     <Box>
       <AppBar component="nav">
@@ -175,20 +148,23 @@ function Navbar() {
             width="90"
           />
           {/**************** Nav Menu ****************/}
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navLinks.map((item) => (
-              <Button
-                key={item.label}
-                sx={{
-                  color: "green.dark",
-                }}
-                to={item.link}
-                href="#"
-              >
-                {t(`nav_bar.${item.label}`)}
-              </Button>
-            ))}
-          </Box>
+          <List sx={{ display: { xs: "none", sm: "block" } }}>
+            {navLinks
+              .filter((item) => !item.links)
+              .map((item) => (
+                <Button
+                  component={Link}
+                  key={item.label}
+                  sx={{
+                    color: "green.dark",
+                  }}
+                  to={item.link}
+                  href="#"
+                >
+                  {t(`nav_bar.${item.label}`)}
+                </Button>
+              ))}
+          </List>
           {/**************** Profile Bar ****************/}
           <Box
             sx={{
@@ -240,7 +216,6 @@ function Navbar() {
                 sx={{
                   p: 2,
                   bgcolor: "pink.main",
-                  display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-evenly",
                 }}

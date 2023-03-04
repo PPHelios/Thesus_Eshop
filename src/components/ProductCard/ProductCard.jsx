@@ -1,27 +1,44 @@
 import Stack from "@mui/material/Stack";
-import styled from "@mui/material/styles/styled";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-const Img = styled("img")({});
+import Box from "@mui/material/Box";
+import { useTranslation } from "react-i18next";
+import { Img } from "../Img/Img";
 function ProductCard({ item }) {
+  const { t, i18n } = useTranslation("common");
+  const lang = i18n.dir();
   return (
     <>
-      <Stack key={item.id} spacing={1} sx={{ alignItems: "flex-start" }}>
-        <Img
-          src={require(`../../assets/images/${item.img}.webp`)}
-          alt={item.alt}
-          sx={{
-            display: "block",
-            maxWidth: "100%",
-            maxHeight: "400px",
-          }}
-        />
+      <Stack
+        key={item.id}
+        spacing={1}
+        sx={{
+          alignItems: "flex-start",
+        }}
+      >
+        <Box sx={{ overflow: "hidden" }}>
+          <Img
+            src={require(`../../assets/images/${item.img}.webp`)}
+            alt={item.alt}
+            sx={{
+              display: "block",
+              maxHeight: "400px",
+              objectFit: "cover",
+              transition: "0.5s",
+              ":hover": {
+                transform: "scale(1.2)",
+              },
+            }}
+          />
+        </Box>
         <Typography variant="h6" as="h6">
-          {item.name}
+          {lang === "rtl" ? item.nameAr : item.name}
         </Typography>
-        <Typography variant="subtitle2">{item.price}</Typography>
-        <Button variant="contained" color="primary" w="50px">
-          Add To Cart
+        <Typography variant="subtitle2">
+          {t("product.price", { valEgp: item.priceEgp, valUsd: item.price })}
+        </Typography>
+        <Button variant="store" color="primary" w="50px">
+          {t("button.addToCart")}
         </Button>
       </Stack>
     </>
