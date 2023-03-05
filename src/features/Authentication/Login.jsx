@@ -10,24 +10,3 @@ function Login() {
   );
 }
 export default Login;
-
-// export const theme = createTheme({
-//   components: {
-//     MuiInputLabel: {
-//       styleOverrides: {
-//         root: {
-//           left: "inherit",
-//           right: "1.75rem",
-//           transformOrigin: "right",
-//         },
-//       },
-//     },
-//     MuiOutlinedInput: {
-//       styleOverrides: {
-//         notchedOutline: {
-//           textAlign: "right",
-//         },
-//       },
-//     },
-//   },
-// });

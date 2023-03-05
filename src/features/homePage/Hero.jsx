@@ -39,7 +39,7 @@ ${spring1380} 1380w`}
           px: "2rem",
           position: { xs: "static", sm: "absolute" },
           top: "10%",
-          color: "green.dark",
+          color: "primary.main",
           justifyContent: "flex-start",
           gap: "3vw",
         }}

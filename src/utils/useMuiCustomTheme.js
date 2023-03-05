@@ -48,13 +48,16 @@ function useMuiCustomTheme() {
       ...(colorMode === "light"
         ? {
             // palette values for light mode
-            green: {
-              main: "#0c6349",
-              dark: "#123026",
+            primary: {
+              main: "#123026",
+              light: "#415951",
+              dark: "#0C211A",
               contrastThreshold: 4.5,
             },
-            pink: {
-              main: "#ddabae",
+            secondary: {
+              main: "#D61A82",
+              light: "#DDABAE",
+              dark: "#95125B",
               contrastThreshold: 4.5,
             },
             // divider: amber[200],
@@ -99,3 +102,24 @@ function useMuiCustomTheme() {
   return theme;
 }
 export default useMuiCustomTheme;
+
+// export const theme = createTheme({
+//   components: {
+//     MuiInputLabel: {
+//       styleOverrides: {
+//         root: {
+//           left: "inherit",
+//           right: "1.75rem",
+//           transformOrigin: "right",
+//         },
+//       },
+//     },
+//     MuiOutlinedInput: {
+//       styleOverrides: {
+//         notchedOutline: {
+//           textAlign: "right",
+//         },
+//       },
+//     },
+//   },
+// });

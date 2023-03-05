@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { Img } from "../../components/Img/Img";
+import { Img } from "../../components/muiStyledComponents/muiStyledComponents";
 
 const products = [
   {
@@ -24,8 +24,8 @@ export default function OurProducts() {
   const { t } = useTranslation("common");
   return (
     <Box my="2rem">
-      <Box mt="2rem" p="2rem" backgroundColor="green.dark">
-        <Typography variant="h1" component="h2" color="pink.main">
+      <Box mt="2rem" p="2rem" backgroundColor="primary.main">
+        <Typography variant="h1" component="h2" color="secondary.light">
           {t("home.socially")}
         </Typography>
       </Box>
@@ -53,14 +53,14 @@ export default function OurProducts() {
                   variant="h3"
                   component="h3"
                   mb={1}
-                  color="green.dark"
+                  color="primary.main"
                 >
                   {t(`nav_bar.${item.name}`)}
                 </Typography>
                 <Typography
                   variant="h6"
                   component="article"
-                  color="green.dark"
+                  color="primary.main"
                   width="50%"
                 >
                   {t(`home.${item.description}`)}
@@ -80,14 +80,14 @@ export default function OurProducts() {
           );
         })}
       </Stack>
-      <Box mt="2rem" p="2rem" backgroundColor="green.dark">
-        <Typography variant="h2" component="h2" color="pink.main">
+      <Box mt="2rem" p="2rem" backgroundColor="primary.main">
+        <Typography variant="h2" component="h2" color="secondary.light">
           {t("home.madeOf1")}
         </Typography>
         <Typography
           variant="h5"
           component="article"
-          color="pink.main"
+          color="secondary.light"
           mt="2rem"
         >
           {t("home.madeOf2")}

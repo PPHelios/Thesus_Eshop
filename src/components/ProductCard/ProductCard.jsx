@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useTranslation } from "react-i18next";
-import { Img } from "../Img/Img";
+import { Img } from "../muiStyledComponents/muiStyledComponents";
 function ProductCard({ item }) {
   const { t, i18n } = useTranslation("common");
   const lang = i18n.dir();

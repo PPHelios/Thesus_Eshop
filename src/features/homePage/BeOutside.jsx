@@ -1,21 +1,37 @@
+import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import {
+  Img,
+  Form,
+} from "../../components/muiStyledComponents/muiStyledComponents";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { Img } from "../../components/Img/Img";
-import { useTranslation } from "react-i18next";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
 import Button from "@mui/material/Button";
 
 function BeOutside() {
-  const [userEmail, setUserEmail] = useState("");
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      userEmail: "",
+    },
+  });
+  const onSubmit = (data) => console.log(data);
   const { t } = useTranslation("common");
+  console.log(errors.userEmail?.message);
+
   return (
     <Box>
-      <Typography variant="h2" color="green.dark" fontWeight="400">
+      <Typography variant="h2" color="primary.main" fontWeight="400">
         {t("home.beOutside")}
       </Typography>
       <Stack
@@ -57,23 +73,43 @@ function BeOutside() {
           alt=""
         />
       </Stack>
-      <Box backgroundColor="#efefef" mt={4}>
-        <Typography variant="h3" color="green.dark" width="60%">
+      <Box backgroundColor="#efefef" mt={4} p={4} pl={8}>
+        <Typography variant="h3" color="primary.main" width="60%">
           {t("home.stayInTouch", { val: 10, valEgp: 300 })}
         </Typography>
-        <FormControl>
-          <TextField
-            id="email"
-            label="email"
-            type="email"
-            placeholder="Enter Your Email"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-          <Button variant="contained" color="success" display="inline-block">
-            Join
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{
+            mt: 2,
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "end",
+            gap: "1rem",
+          }}
+        >
+          <FormControl error variant="standard">
+            <Controller
+              name="userEmail"
+              control={control}
+              rules={{ required: "Email Address is required" }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="component-error"
+                  label={t("button.email")}
+                  variant="standard"
+                  placeholder="Enter Your Email"
+                />
+              )}
+            />
+            <FormHelperText id="component-helper-text">
+              {errors.userEmail && errors.userEmail.message}
+            </FormHelperText>
+          </FormControl>
+          <Button variant="contained" color="primary">
+            {t("button.joinUs")}
           </Button>
-        </FormControl>
+        </Form>
       </Box>
     </Box>
   );

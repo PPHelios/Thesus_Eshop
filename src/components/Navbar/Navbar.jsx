@@ -10,6 +10,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -22,6 +23,10 @@ import Popover from "@mui/material/Popover";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
@@ -56,7 +61,8 @@ function Navbar() {
       links: [
         { link: "/Men", label: "Profile_Settings", icon: "" },
         { link: "/Women", label: "Favorites", icon: "" },
-        { link: "/login", label: "Login", icon: "" },
+        { link: "/login", label: "login", icon: "" },
+        { link: "/logout", label: "logout", icon: "LogoutOutlinedIcon" },
       ],
     },
     { link: "/Terrace Clogs", label: "weekendBoots" },
@@ -67,19 +73,21 @@ function Navbar() {
   ];
 
   const navItems = navLinks.map((item) => {
-    const menuItems = item?.links?.map((subItem) => (
-      <ListItem
-        key={subItem.label}
-        button
-        component={Link}
-        to={subItem.link}
-        sx={{ pl: 4 }}
-        href="#"
-        onClick={() => setMobileDrawerOpen(false)}
-      >
-        <ListItemText primary={t(`nav_bar.${subItem.label}`)} />
-      </ListItem>
-    ));
+    const menuItems = item?.links?.map((subItem) => {
+      const icon = subItem?.icon;
+      return (
+        <ListItem
+          key={subItem.label}
+          button
+          component={Link}
+          sx={{ pl: 4 }}
+          href={subItem.link}
+          onClick={() => setMobileDrawerOpen(false)}
+        >
+          <ListItemText primary={t(`nav_bar.${subItem.label}`)} />
+        </ListItem>
+      );
+    });
     if (menuItems) {
       return (
         <Box key={item.label}>
@@ -102,9 +110,8 @@ function Navbar() {
         key={item.label}
         button
         component={Link}
-        to={item.link}
         disablePadding
-        href="#"
+        href={item.link}
         onClick={() => setMobileDrawerOpen(false)}
       >
         <ListItemButton sx={{ textAlign: "center" }}>
@@ -121,7 +128,7 @@ function Navbar() {
         <Stack
           sx={{
             height: 60,
-            backgroundColor: "green.dark",
+            backgroundColor: "primary.main",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -134,8 +141,8 @@ function Navbar() {
         <Toolbar
           sx={{
             height: 60,
-            backgroundColor: "pink.main",
-            color: "green.dark",
+            backgroundColor: "secondary.light",
+            color: "primary.main",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -152,7 +159,7 @@ function Navbar() {
             <MenuIcon />
           </IconButton>
           {/**************** Logo ****************/}
-          <Link to="/" href="#">
+          <Link href="/" component={Link}>
             <img
               src={require("../../assets/images/Thesus_logo.webp")}
               alt="company logo"
@@ -168,10 +175,9 @@ function Navbar() {
                   component={Link}
                   key={item.label}
                   sx={{
-                    color: "green.dark",
+                    color: "primary.main",
                   }}
-                  to={item.link}
-                  href="#"
+                  href={item.link}
                 >
                   {t(`nav_bar.${item.label}`)}
                 </Button>
@@ -227,7 +233,7 @@ function Navbar() {
               <Stack
                 sx={{
                   p: 2,
-                  bgcolor: "pink.main",
+                  bgcolor: "secondary.light",
                   flexDirection: "column",
                   justifyContent: "space-evenly",
                 }}
@@ -250,32 +256,50 @@ function Navbar() {
                   <ListItem
                     button
                     component={Link}
-                    to={"/"}
                     disablePadding
-                    href="#"
+                    href="/"
                     onClick={() => setProfilePopoverOpen(null)}
                   >
+                    <ListItemIcon>
+                      <ManageAccountsOutlinedIcon />
+                    </ListItemIcon>
                     <ListItemText primary={t(`nav_bar.Profile_Settings`)} />
                   </ListItem>
                   <ListItem
                     button
                     component={Link}
-                    to={"/"}
-                    href="#"
+                    href="/"
                     disablePadding
                     onClick={() => setProfilePopoverOpen(null)}
                   >
+                    <ListItemIcon>
+                      <FavoriteBorderOutlinedIcon />
+                    </ListItemIcon>
                     <ListItemText primary={t(`nav_bar.Favorites`)} />
                   </ListItem>
                   <ListItem
                     button
                     component={Link}
-                    to={"/login"}
-                    href="#"
+                    href="/login"
                     disablePadding
                     onClick={() => setProfilePopoverOpen(null)}
                   >
-                    <ListItemText primary={t(`nav_bar.Login`)} />
+                    <ListItemIcon m={0}>
+                      <LoginOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={t(`nav_bar.login`)} />
+                  </ListItem>
+                  <ListItem
+                    button
+                    component={Link}
+                    href="/login"
+                    disablePadding
+                    onClick={() => setProfilePopoverOpen(null)}
+                  >
+                    <ListItemIcon>
+                      <LogoutOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={t(`nav_bar.logout`)} />
                   </ListItem>
                 </List>
               </Stack>
@@ -305,7 +329,7 @@ function Navbar() {
               width: "100%",
               height: "100%",
               maxWidth: 360,
-              bgcolor: "pink.main",
+              bgcolor: "secondary.light",
               paddingTop: 5,
             }}
             component="nav"
