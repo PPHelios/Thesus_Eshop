@@ -16,7 +16,7 @@ function BeOutside() {
   return (
     <Box>
       <Typography variant="h2" color="green.dark" fontWeight="400">
-        #BeOutside
+        {t("home.beOutside")}
       </Typography>
       <Stack
         sx={{
@@ -57,8 +57,8 @@ function BeOutside() {
           alt=""
         />
       </Stack>
-      <Box backgroundColor="#efefef" mt={4} width="60%">
-        <Typography variant="h3" color="green.dark">
+      <Box backgroundColor="#efefef" mt={4}>
+        <Typography variant="h3" color="green.dark" width="60%">
           {t("home.stayInTouch", { val: 10, valEgp: 300 })}
         </Typography>
         <FormControl>

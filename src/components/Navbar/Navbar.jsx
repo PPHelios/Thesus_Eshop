@@ -30,7 +30,7 @@ function Navbar() {
   const [listDrawerOpen, setListDrawerOpen] = useState(false);
   const [profilePopoverOpen, setProfilePopoverOpen] = useState(null);
 
-  const { t, i18n } = useTranslation("common");
+  const { t } = useTranslation("common");
 
   const handleMenuDrawerToggle = () => {
     setMobileDrawerOpen((prevState) => !prevState);
@@ -51,18 +51,19 @@ function Navbar() {
 
   const navLinks = [
     {
-      link: "Profile",
+      link: "/Profile",
       label: "Profile",
       links: [
-        { link: "Men", label: "Profile_Settings", icon: "" },
-        { link: "Women", label: "Favorites", icon: "" },
+        { link: "/Men", label: "Profile_Settings", icon: "" },
+        { link: "/Women", label: "Favorites", icon: "" },
+        { link: "/login", label: "Login", icon: "" },
       ],
     },
-    { link: "Terrace Clogs", label: "weekendBoots" },
-    { link: "Terrace Clogs", label: "Terrace_Clogs" },
-    { link: "Accessories", label: "Accessories" },
-    { link: "Shop All", label: "Shop_All" },
-    { link: "Values", label: "Values" },
+    { link: "/Terrace Clogs", label: "weekendBoots" },
+    { link: "/Terrace Clogs", label: "Terrace_Clogs" },
+    { link: "/Accessories", label: "Accessories" },
+    { link: "/Shop All", label: "Shop_All" },
+    { link: "/Values", label: "Values" },
   ];
 
   const navItems = navLinks.map((item) => {
@@ -72,8 +73,9 @@ function Navbar() {
         button
         component={Link}
         to={subItem.link}
-        href="#"
         sx={{ pl: 4 }}
+        href="#"
+        onClick={() => setMobileDrawerOpen(false)}
       >
         <ListItemText primary={t(`nav_bar.${subItem.label}`)} />
       </ListItem>
@@ -89,14 +91,22 @@ function Navbar() {
           </ListItem>
           {!listDrawerOpen && <Divider />}
           <Collapse in={listDrawerOpen} timeout="auto" unmountOnExit>
-            <List component="div">{menuItems}</List>
+            <List>{menuItems}</List>
             <Divider />
           </Collapse>
         </Box>
       );
     }
     return (
-      <ListItem key={item.label} disablePadding>
+      <ListItem
+        key={item.label}
+        button
+        component={Link}
+        to={item.link}
+        disablePadding
+        href="#"
+        onClick={() => setMobileDrawerOpen(false)}
+      >
         <ListItemButton sx={{ textAlign: "center" }}>
           <ListItemText primary={t(`nav_bar.${item.label}`)} />
         </ListItemButton>
@@ -142,12 +152,14 @@ function Navbar() {
             <MenuIcon />
           </IconButton>
           {/**************** Logo ****************/}
-          <img
-            src={require("../../assets/images/Thesus_logo.webp")}
-            alt="company logo"
-            width="90"
-          />
-          {/**************** Nav Menu ****************/}
+          <Link to="/" href="#">
+            <img
+              src={require("../../assets/images/Thesus_logo.webp")}
+              alt="company logo"
+              width="90"
+            />
+          </Link>
+          {/**************** Humburger Nav Menu ****************/}
           <List sx={{ display: { xs: "none", sm: "block" } }}>
             {navLinks
               .filter((item) => !item.links)
@@ -235,11 +247,35 @@ function Navbar() {
                 </Box>
                 <Divider />
                 <List>
-                  <ListItem button component={Link} to={"/"} href="#">
+                  <ListItem
+                    button
+                    component={Link}
+                    to={"/"}
+                    disablePadding
+                    href="#"
+                    onClick={() => setProfilePopoverOpen(null)}
+                  >
                     <ListItemText primary={t(`nav_bar.Profile_Settings`)} />
                   </ListItem>
-                  <ListItem button component={Link} to={"/"} href="#">
+                  <ListItem
+                    button
+                    component={Link}
+                    to={"/"}
+                    href="#"
+                    disablePadding
+                    onClick={() => setProfilePopoverOpen(null)}
+                  >
                     <ListItemText primary={t(`nav_bar.Favorites`)} />
+                  </ListItem>
+                  <ListItem
+                    button
+                    component={Link}
+                    to={"/login"}
+                    href="#"
+                    disablePadding
+                    onClick={() => setProfilePopoverOpen(null)}
+                  >
+                    <ListItemText primary={t(`nav_bar.Login`)} />
                   </ListItem>
                 </List>
               </Stack>
@@ -283,7 +319,7 @@ function Navbar() {
                 pb: 3,
               }}
             >
-              <LanguageSwitcher />
+              <LanguageSwitcher closeHamburgerDrawer={handleMenuDrawerToggle} />
               <ThemeToggler />
             </Box>
             {navItems}

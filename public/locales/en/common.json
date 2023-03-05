@@ -8,7 +8,8 @@
     "Terrace_Clogs": "Terrace Clogs",
     "Accessories": "Accessories",
     "Shop_All": "Shop All",
-    "Values": "Values"
+    "Values": "Values",
+    "Login": "Login"
   },
   "home": {
     "newCollection": "The New Collection is Here.",
@@ -19,7 +20,8 @@
     "madeOf2": "Each pair diverts 1-2 Kg of waste from waterways and landfill, reduces 20 Kg of CO2 and conserves 10 L of water compared to your traditional leather boot.",
     "bootDescription": "The Weekend Boot is a comfy, water resistant and breathable all-year boot. Each pair is made with a tough recycled nylon and natural rubber sole",
     "clogDescription": "The Terrus is an easy, comfy slip on. The upper is made of a tough recycled nylon and natural rubber sole.",
-    "stayInTouch": "Let’s stay in touch. Get {{val, currency(USD)}} off your first purchase, early access to new releases and outdoor tips, trips and education."
+    "stayInTouch": "Let's stay in touch. Get {{val, currency(USD)}} off your first purchase, early access to new releases and outdoor tips, trips and education.",
+    "beOutside": "#BeOutside"
   },
   "button": {
     "save": "Save",

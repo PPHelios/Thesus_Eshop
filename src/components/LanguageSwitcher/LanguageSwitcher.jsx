@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-function LanguageSwitcher({ closeProfilePopover }) {
+function LanguageSwitcher({ closeProfilePopover, closeHamburgerDrawer }) {
   const { i18n } = useTranslation();
   return (
     <div className="select">
@@ -8,7 +8,9 @@ function LanguageSwitcher({ closeProfilePopover }) {
         value={i18n.language}
         onChange={(e) => {
           i18n.changeLanguage(e.target.value);
-          closeProfilePopover();
+
+          closeProfilePopover && closeProfilePopover();
+          // closeHamburgerDrawer && closeHamburgerDrawer();
         }}
       >
         <option value="en">English</option>
