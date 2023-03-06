@@ -17,6 +17,7 @@ import { cacheRtl, cacheLtr } from "./utils/rtlCache";
 
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./features/homePage/HomePage";
+import Signup from "./features/Authentication/Signup";
 import Login from "./features/Authentication/Login";
 
 function App() {
@@ -33,7 +34,8 @@ function App() {
       <>
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
         </Route>
       </>
     )

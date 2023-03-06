@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -30,8 +29,8 @@ function BeOutside() {
   console.log(errors.userEmail?.message);
 
   return (
-    <Box>
-      <Typography variant="h2" color="primary.main" fontWeight="400">
+    <Box px="1rem">
+      <Typography variant="h2" mb={2} color="primary.main" fontWeight="400">
         {t("home.beOutside")}
       </Typography>
       <Stack

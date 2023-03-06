@@ -33,10 +33,10 @@ ${spring1380} 1380w`}
       />
       <Stack
         sx={{
-          width: { sm: "50%", lg: "40%" },
+          width: { xs: "80%", sm: "50%", lg: "40%" },
           height: "100%",
           mt: "2rem",
-          px: "2rem",
+          px: "1rem",
           position: { xs: "static", sm: "absolute" },
           top: "10%",
           color: "primary.main",

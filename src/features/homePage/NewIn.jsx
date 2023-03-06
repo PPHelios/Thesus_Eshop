@@ -27,7 +27,7 @@ const data = [
 function NewIn() {
   const { t } = useTranslation("common");
   return (
-    <Box as="section" mt="2rem">
+    <Box as="section" mt="2rem" px="1rem">
       <Typography variant="h3" as="h3" sx={{ mx: "auto", my: 2, pl: 2 }}>
         {t("home.newIn")}
       </Typography>

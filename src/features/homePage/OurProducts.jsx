@@ -23,7 +23,7 @@ const products = [
 export default function OurProducts() {
   const { t } = useTranslation("common");
   return (
-    <Box my="2rem">
+    <Box>
       <Box mt="2rem" p="2rem" backgroundColor="primary.main">
         <Typography variant="h1" component="h2" color="secondary.light">
           {t("home.socially")}
@@ -31,7 +31,6 @@ export default function OurProducts() {
       </Box>
       <Stack
         sx={{
-          maxWidth: { xs: "96%", sm: "86%" },
           mx: "auto",
           mt: 2,
           flexDirection: { sm: "row" },
@@ -46,7 +45,7 @@ export default function OurProducts() {
               justifyContent="space-between"
               alignItems="flex-start"
               backgroundColor="#efefef"
-              sx={{ maxWidth: { sm: "40%" } }}
+              sx={{ maxWidth: { sm: "40%" }, p: "1rem" }}
             >
               <Box>
                 <Typography
