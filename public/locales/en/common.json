@@ -34,5 +34,18 @@
   "product": {
     "name": "Name",
     "price": "{{valUsd, currency(USD)}}"
-  }
+  },
+"footer":{
+    "ourShop":"Our Shop",
+    "help":"Help",
+"sizeGuides":"Size Guides",
+"shippingInfo":"Shipping Information",
+"refundPolicy":"Refund Policy",
+"faq":"FAQ",
+"aboutUs":"About Us",
+"terms":"Terms Of Service",
+"contact":"Contact Us",
+"getInTouch":"Get In Touch"
+
+}
 }
