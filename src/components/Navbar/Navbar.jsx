@@ -56,20 +56,20 @@ function Navbar() {
 
   const navLinks = [
     {
-      link: "/Profile",
+      link: "/user/profile",
       label: "Profile",
       links: [
-        { link: "/Men", label: "Profile_Settings", icon: "" },
-        { link: "/Women", label: "Favorites", icon: "" },
+        { link: "/user/profile/settings", label: "Profile_Settings", icon: "" },
+        { link: "/user/favorites", label: "Favorites", icon: "" },
         { link: "/login", label: "login", icon: "" },
         { link: "/logout", label: "logout", icon: "LogoutOutlinedIcon" },
       ],
     },
-    { link: "/Terrace Clogs", label: "weekendBoots" },
-    { link: "/Terrace Clogs", label: "Terrace_Clogs" },
-    { link: "/Accessories", label: "Accessories" },
-    { link: "/Shop All", label: "Shop_All" },
-    { link: "/Values", label: "Values" },
+    { link: "/weekendBoots", label: "weekendBoots" },
+    { link: "/terraceClogs", label: "Terrace_Clogs" },
+    { link: "/accessories", label: "Accessories" },
+    { link: "/shopAll", label: "Shop_All" },
+    { link: "/values", label: "Values" },
   ];
 
   const navItems = navLinks.map((item) => {
