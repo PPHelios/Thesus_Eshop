@@ -33,7 +33,23 @@
   },
   "product": {
     "name": "اسم المنتج",
-    "price": "{{valEgp, currency(EGP)}}"
+    "price": "{{valEgp, currency(EGP)}}"،
+    "rating":"التقيييم",
+    "productName":"إسم المنتج",
+
+    "productPrice":"سعر المنتج",
+
+    "category":"الفئه",
+
+    "quantity":"الكميه",
+
+    "Price":"السعر",
+
+    "discountedPrice":"السعر بعد الخصم",
+
+    "discountPercentage":"نسبة الخصم",
+
+    "sku":"كود تعريف المنتج"
   },
   "footer": {
     "ourShop": "منتجاتنا",
@@ -46,5 +62,55 @@
     "terms": "الشروط و الأحكام",
     "contact": "تواصل معنا",
     "follow": "تابع آخر أخبارنا"
-  }
+  },
+  
+
+  "form":{
+
+    "firstName":"الإسم",
+
+    "lastName":"اللقب",
+
+    "email": "البريد الإلكتروني",
+
+    "password":"كلمه السر",
+
+    "rePassword":"أعد إدخال كلمه السر",
+
+    "address":"العنوان",
+
+    "phoneNumber":"رقم التليفون",
+
+    "gender":"الجنس",
+
+    "birthDate":"تاريخ الميلاد",
+
+
+
+ 
+    
+
+    
+
+    },
+
+  "errors":{
+
+  "fieldRequired":"هذا الحقل مطلوب",
+
+  "fieldMin":"هذا الحقل لا يجب ان يقل عن {{val}} حرف ",
+
+    "fieldMax":"هذا الحقل لا يجب ان يزيد عن {{val}} حرف",
+
+    "notValidPwd":"كلمه المرور غير صحيحه",
+    "notMatchingPwd";"كلمه المرور غير متطابقه",
+    "notValidEmail":"البريد الإلكتروني غير صحيح",
+    "notRegEmail":"هذا البريد الإلكتروني غير مسجل",
+"notVallidPhone":"رقم الهاتف غير صحيح"
+    "pwdRegex":" كلمه السر لا يجب أن تقل عن ٨ أحرف منهم حرف كبير و علامه ",
+
+    "pwdDoesntMatch":"كلمه السر غير متطابقه"
+
+  
+  
 }
