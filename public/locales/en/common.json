@@ -1,16 +1,13 @@
 {
   "nav_bar": {
     "Announcement": "Free Shipping on Orders Over 1000$",
-    "Profile": "Profile",
-    "Profile_Settings": "Profile Settings",
-    "Favorites": "Favorites",
+    
     "weekendBoots": "Weekend Boots",
     "Terrace_Clogs": "Terrace Clogs",
     "Accessories": "Accessories",
     "Shop_All": "Shop All",
-    "Values": "Values",
-    "login": "Login",
-    "logout": "Logout"
+    "Values": "Values"
+    
   },
   "home": {
     "newCollection": "The New Collection is Here.",
@@ -29,13 +26,37 @@
     "addToCart": "Add To Cart",
     "shopNow": "Shop Now",
     "joinUs": "Join us",
-    "submit":"Submit"
+    "submit":"Submit",
+    "login": "Login",
+
+    "logout": "Logout"
+   "signup":"Sign Up",
+    "profile": "Profile",
+
+    "profileSettings": "Profile Settings",
+
+    "favorites": "Favorites",
     
     
   },
   "product": {
     "name": "Name",
-    "price": "{{valUsd, currency(USD)}}"
+    "price": "{{valUsd, currency(USD)}}",
+    "productName":"Product Name",
+
+    "productPrice":"Product Price",
+
+    "category":"Category",
+
+    "quantity":"Quantity",
+
+    "Price":"Price",
+
+    "discountedPrice":"Discounted Price",
+
+    "discountPercentage":"Discount Percentage",
+
+    "sku":"SKU"
   },
 "footer":{
     "ourShop":"Our Shop",
@@ -60,15 +81,11 @@
     "phoneNumber":"Phone Number",
     "gender":"Gender",
     "birthDate":"BirthDate",
+    "alreadyMember":"Already a Member",
+
+    "notMember":"Not A Member"
     
-    "productName":"Product Name",
-    "productPrice":"Product Price",
-    "category":"Category",
-    "quantity":"Quantity",
-    "Price":"Price",
-    "discountedPrice":"Discounted Price",
-    "discountPercentage":"Discount Percentage",
-    "sku":"SKU"
+    
     
     
     },
@@ -78,6 +95,14 @@
     "fieldMax":"This Field Can't be more than {{val}} Characters",
     "notValid":"Not A Valid {{val}}",
     "pwdRegex":"Password Must Be At Least 8 Characters Containing A Capital Letter And A Special Character",
-    "pwdDoesntMatch":"Passwords Doesn't Match",
+    "notValidPwd":"This Password Isn't correct",
+"pwdDoesntMatch":"Password Doesn't Match",
+    
+
+    "notValidEmail":"Enter A Vallid Email",
+
+    "notRegEmail":"This Email Is Not Registered",
+
+"notVallidPhone":"Enter A Valid Phone Number"
   }
 }
