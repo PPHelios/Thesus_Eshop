@@ -29,7 +29,9 @@
     "addToCart": "Add To Cart",
     "shopNow": "Shop Now",
     "joinUs": "Join us",
-    "email": "Email"
+    "submit":"Submit"
+    
+    
   },
   "product": {
     "name": "Name",
@@ -47,5 +49,35 @@
 "contact":"Contact Us",
 "follow":"Follow Our Latest News"
 
-}
+},
+  "form":{
+    "firstName":"First Name",
+    "lastName":"Last Name",
+    "email": "Email",
+    "password":"Password",
+    "rePassword":"Renter Password",
+    "address":"Address",
+    "phoneNumber":"Phone Number",
+    "gender":"Gender",
+    "birthDate":"BirthDate",
+    
+    "productName":"Product Name",
+    "productPrice":"Product Price",
+    "category":"Category",
+    "quantity":"Quantity",
+    "Price":"Price",
+    "discountedPrice":"Discounted Price",
+    "discountPercentage":"Discount Percentage",
+    "sku":"SKU"
+    
+    
+    },
+  "formErrors":{
+  "fieldRequired":"This Field Is Required",
+  "fieldMin":"This Field Can't be less than {{val}} Characters",
+    "fieldMax":"This Field Can't be more than {{val}} Characters",
+    "notValid":"Not A Valid {{val}}",
+    "pwdRegex":"Password Must Be At Least 8 Characters Containing A Capital Letter And A Special Character",
+    "pwdDoesntMatch":"Passwords Doesn't Match",
+  }
 }
