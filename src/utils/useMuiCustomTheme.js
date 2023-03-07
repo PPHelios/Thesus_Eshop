@@ -95,6 +95,11 @@ function useMuiCustomTheme() {
           }),
         },
       },
+      MuiFormHelperText: {
+        styleOverrides: {
+          root: { color: "red" },
+        },
+      },
     },
   });
 

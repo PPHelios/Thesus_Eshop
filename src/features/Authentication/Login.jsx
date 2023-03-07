@@ -34,7 +34,7 @@ function Login() {
       as="section"
     >
       <Typography variant="h1" textAlign="center" mb={4}>
-        Login
+        {t("button.login")}
       </Typography>
       <Form
         textAlign="center"
@@ -47,16 +47,17 @@ function Login() {
         <Controller
           name="email"
           control={control}
-          rules={{ required: "Email Address is required" }}
+          rules={{ required: t("formErrors.fieldRequired") }}
           render={({ field }) => (
             <TextField
               {...field}
               fullWidth
               id="email"
-              label={t("button.email")}
+              label={t("form.email")}
               variant="standard"
               placeholder="Enter Your email"
               helperText={errors.email && errors.email.message}
+              //  sx={{ ".MuiFormHelperText-root": { color: "red" } }}
             />
           )}
         />
@@ -64,13 +65,13 @@ function Login() {
         <Controller
           name="password"
           control={control}
-          rules={{ required: "Password is required" }}
+          rules={{ required: t("formErrors.fieldRequired") }}
           render={({ field }) => (
             <TextField
               {...field}
               fullWidth
               id="password"
-              label={t("button.password")}
+              label={t("form.password")}
               variant="standard"
               placeholder="Enter Your Password"
               helperText={errors.password && errors.password.message}
@@ -82,17 +83,18 @@ function Login() {
           type="submit"
           variant="contained"
           color="primary"
+          fullWidth
           sx={{ display: "block", mt: 4, mx: "auto" }}
         >
-          {t("button.login")}
+          {t("button.submit")}
         </Button>
       </Form>
-      <Box textAlign="right">
+      <Box>
         <Typography mt={4} mr={1} display="inline-block">
-          Not A Member
+          {t("form.notMember")}
         </Typography>
         <Link href="/signup" color="secondary.main">
-          Sign Up
+          {t("button.signup")}
         </Link>
       </Box>
     </Box>

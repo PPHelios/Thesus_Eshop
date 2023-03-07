@@ -15,10 +15,22 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import { cacheRtl, cacheLtr } from "./utils/rtlCache";
 
+// Date Picker
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// To Localie Date Picker
+import "dayjs/locale/ar";
+// To use UTC
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./features/homePage/HomePage";
-import Signup from "./features/Authentication/Signup";
-import Login from "./features/Authentication/Login";
+import Signup from "./features/authentication/Signup";
+import Login from "./features/authentication/Login";
+import Store from "./features/store/Store";
+
+dayjs.extend(utc);
 
 function App() {
   const theme = useMuiCustomTheme();
@@ -36,6 +48,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
+          <Route path="/store" element={<Store />} />
         </Route>
       </>
     )
@@ -43,12 +56,18 @@ function App() {
   return (
     <CacheProvider value={docDir === "rtl" ? cacheRtl : cacheLtr}>
       <ThemeProvider theme={theme}>
-        <Suspense fallback="Loading...">
-          <>
-            <CssBaseline />
-            <RouterProvider router={router} />
-          </>
-        </Suspense>
+        <LocalizationProvider
+          dateAdapter={AdapterDayjs}
+          adapterLocale="ar"
+          dateLibInstance={dayjs.utc}
+        >
+          <Suspense fallback="Loading...">
+            <>
+              <CssBaseline />
+              <RouterProvider router={router} />
+            </>
+          </Suspense>
+        </LocalizationProvider>
       </ThemeProvider>
     </CacheProvider>
   );

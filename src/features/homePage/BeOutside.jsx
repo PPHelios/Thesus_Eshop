@@ -95,7 +95,7 @@ function BeOutside() {
                 <TextField
                   {...field}
                   id="component-error"
-                  label={t("button.email")}
+                  label={t("form.email")}
                   variant="standard"
                   placeholder="Enter Your Email"
                 />

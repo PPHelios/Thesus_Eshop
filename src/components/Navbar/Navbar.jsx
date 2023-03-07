@@ -20,6 +20,7 @@ import Stack from "@mui/material/Stack";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Popover from "@mui/material/Popover";
+import Badge from "@mui/material/Badge";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -57,19 +58,19 @@ function Navbar() {
   const navLinks = [
     {
       link: "/user/profile",
-      label: "Profile",
+      label: "profile",
       links: [
-        { link: "/user/profile/settings", label: "Profile_Settings", icon: "" },
-        { link: "/user/favorites", label: "Favorites", icon: "" },
+        { link: "/user/profile/settings", label: "profileSettings", icon: "" },
+        { link: "/user/favorites", label: "favorites", icon: "" },
         { link: "/login", label: "login", icon: "" },
         { link: "/logout", label: "logout", icon: "LogoutOutlinedIcon" },
       ],
     },
     { link: "/weekendBoots", label: "weekendBoots" },
-    { link: "/terraceClogs", label: "Terrace_Clogs" },
-    { link: "/accessories", label: "Accessories" },
-    { link: "/shopAll", label: "Shop_All" },
-    { link: "/values", label: "Values" },
+    { link: "/terraceClogs", label: "terraceClogs" },
+    { link: "/accessories", label: "accessories" },
+    { link: "/shopAll", label: "shopAll" },
+    { link: "/values", label: "values" },
   ];
 
   const navItems = navLinks.map((item) => {
@@ -84,7 +85,7 @@ function Navbar() {
           href={subItem.link}
           onClick={() => setMobileDrawerOpen(false)}
         >
-          <ListItemText primary={t(`nav_bar.${subItem.label}`)} />
+          <ListItemText primary={t(`button.${subItem.label}`)} />
         </ListItem>
       );
     });
@@ -93,7 +94,7 @@ function Navbar() {
         <Box key={item.label}>
           <ListItem disablePadding>
             <ListItemButton onClick={handleListDrawerToggle} height="20">
-              <ListItemText primary={t(`nav_bar.${item.label}`)} />
+              <ListItemText primary={t(`button.${item.label}`)} />
               {listDrawerOpen ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </ListItem>
@@ -134,7 +135,7 @@ function Navbar() {
           }}
         >
           <Typography align="center" variant="h5" component="p">
-            {t("nav_bar.Announcement")}
+            {t("nav_bar.Announcement", { valUsd: 50, valEgp: 1000 })}
           </Typography>
         </Stack>
         {/**************** Navbar ****************/}
@@ -203,7 +204,9 @@ function Navbar() {
               sx={{ p: 0 }}
               aria-label="shopping cart"
             >
-              <ShoppingBagOutlinedIcon />
+              <Badge badgeContent={4} color="primary" invisible={false && true}>
+                <ShoppingBagOutlinedIcon />
+              </Badge>
             </IconButton>
             <IconButton
               aria-label="profile menu"
@@ -263,7 +266,7 @@ function Navbar() {
                     <ListItemIcon>
                       <ManageAccountsOutlinedIcon />
                     </ListItemIcon>
-                    <ListItemText primary={t(`nav_bar.Profile_Settings`)} />
+                    <ListItemText primary={t(`button.profileSettings`)} />
                   </ListItem>
                   <ListItem
                     button
@@ -275,7 +278,7 @@ function Navbar() {
                     <ListItemIcon>
                       <FavoriteBorderOutlinedIcon />
                     </ListItemIcon>
-                    <ListItemText primary={t(`nav_bar.Favorites`)} />
+                    <ListItemText primary={t(`button.favorites`)} />
                   </ListItem>
                   <ListItem
                     button
@@ -287,7 +290,7 @@ function Navbar() {
                     <ListItemIcon m={0}>
                       <LoginOutlinedIcon />
                     </ListItemIcon>
-                    <ListItemText primary={t(`nav_bar.login`)} />
+                    <ListItemText primary={t(`button.login`)} />
                   </ListItem>
                   <ListItem
                     button
@@ -299,7 +302,7 @@ function Navbar() {
                     <ListItemIcon>
                       <LogoutOutlinedIcon />
                     </ListItemIcon>
-                    <ListItemText primary={t(`nav_bar.logout`)} />
+                    <ListItemText primary={t(`button.logout`)} />
                   </ListItem>
                 </List>
               </Stack>

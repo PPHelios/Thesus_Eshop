@@ -8,12 +8,12 @@ import spring941 from "../../assets/images/2023_spring_pink_tzpwlq_c_scale,w_941
 import spring1232 from "../../assets/images/2023_spring_pink_tzpwlq_c_scale,w_1232.webp";
 import spring1380 from "../../assets/images/2023_spring_pink_tzpwlq_c_scale,w_1380.webp";
 import Button from "@mui/material/Button";
+import { Img } from "../../components/muiStyledComponents/muiStyledComponents";
 
-const Img = styled("img")({});
 function Hero() {
   const { t } = useTranslation("common");
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box as="main" sx={{ position: "relative" }}>
       <Img
         sizes="(max-width: 1380px) 100vw, 1380px"
         srcset={`${spring350} 350w,
@@ -24,7 +24,8 @@ ${spring1380} 1380w`}
         alt="new shoes picture"
         sx={{
           width: "100%",
-          maxHeight: "85vh",
+          maxHeight: "70vh",
+          maxHeight: "87vh",
           display: "block",
           mx: "auto",
           objectFit: "cover",

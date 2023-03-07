@@ -1,3 +1,6 @@
 img {
   max-width: 100%;
 }
+.MuiFormHelperText-root {
+  font-size: 2rem;
+}

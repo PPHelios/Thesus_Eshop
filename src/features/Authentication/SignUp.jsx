@@ -13,14 +13,18 @@ import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-
+import dayjs from "dayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 function Signup() {
+  const { t } = useTranslation("common");
+
   const schema = yup.object().shape({
     firstName: yup
 
       .string()
 
-      .required("This Field is required")
+      .required(t("formErrors.fieldRequired"))
 
       .default("")
 
@@ -31,7 +35,7 @@ function Signup() {
 
       .string()
 
-      .required("This Field is required")
+      .required(t("formErrors.fieldRequired"))
 
       .default("")
 
@@ -41,44 +45,42 @@ function Signup() {
     email: yup
       .string()
       // .email("must be a valid email")
-      .min(3, "Email must be at least 3 characters long")
-      .max(20, "Email must be 30 characters max")
+      .max(20, t("formErrors.fieldMax", { val: "30" }))
       .matches(
         /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-        "Not A Vallid Email"
+        t("formErrors.notValid", { val: "email" })
       )
-      .required("This Field is required")
+      .required(t("formErrors.fieldRequired"))
       .trim(),
 
-    password: yup.string().required("This Field is required"),
+    password: yup.string().required(t("formErrors.fieldRequired")),
     rePassword: yup
       .string()
-      .required("Password is mendatory")
-      .oneOf([yup.ref("password")], "Passwords does not match"),
+      .required(t("formErrors.fieldRequired"))
+      .oneOf([yup.ref("password")], t("formErrors.pwdDoesntMatch")),
     phoneNumber: yup
       .string()
-      .required("This Field is required")
-      .min(5, "Phone Number must be at least 5 characters long")
-      .max(20, "Phone Number must be 20 characters max")
+      .required(t("formErrors.fieldRequired"))
+      .min(5, t("formErrors.fieldMin", { val: "5" }))
+      .max(20, t("formErrors.fieldMax", { val: "20" }))
       .matches(
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-        "Not A Valid Phone Number"
+        t("formErrors.notValid", { val: "Phone Number" })
       ),
-
-    gender: yup.string().required("This Field is required"),
-
-    //   birthDate: yup
-    //     .date()
-    //     .min("1900-01-01")
-    //     .max("2000-01-01")
-    //     .required("This Field is required"),
+    gender: yup.string().required(t("formErrors.fieldRequired")),
 
     address: yup
       .string()
-      .required("This Field is required")
-      .min(5, "Email must be at least 3 characters long")
-      .max(30, "Email must be 30 characters max")
+      .required(t("formErrors.fieldRequired"))
+      .min(5, t("formErrors.fieldMin", { val: "5" }))
+      .max(30, t("formErrors.fieldMax", { val: "30" }))
       .trim(),
+
+    birthDate: yup
+      .date()
+      .min(dayjs.utc("1900-01-01"), t("formErrors.dateBefore"))
+      .max(dayjs.utc(), t("formErrors.dateAfter"))
+      .required(t("formErrors.fieldRequired")),
   });
 
   const {
@@ -98,6 +100,7 @@ function Signup() {
       phoneNumber: "",
       gender: "",
       address: "",
+      birthDate: dayjs.utc("2000-01-1"),
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -105,13 +108,11 @@ function Signup() {
     reValidateMode: "onChange",
   });
 
-  const onSubmit = (data) => console.log(data);
-
-  const { t } = useTranslation("common");
+  const onSubmit = (data) => console.log(data.birthDate);
 
   const genders = [
-    { value: "Male", name: "Male" },
-    { value: "Female", name: "Female" },
+    { value: "Male", name: t("form.male") },
+    { value: "Female", name: t("form.female") },
   ];
   return (
     <Box
@@ -123,7 +124,7 @@ function Signup() {
       sx={{ width: { xs: "90%", sm: "600px" } }}
     >
       <Typography variant="h1" mb={4} textAlign="center">
-        Sign Up
+        {t("button.signup")}
       </Typography>
       <Form
         onSubmit={handleSubmit(onSubmit)}
@@ -140,9 +141,8 @@ function Signup() {
             <TextField
               {...field}
               id="firstName"
-              label={t("button.firstName")}
+              label={t("form.firstName")}
               variant="standard"
-              placeholder="Enter Your First Name"
               helperText={errors.firstName && errors.firstName.message}
             />
           )}
@@ -154,9 +154,8 @@ function Signup() {
             <TextField
               {...field}
               id="lastName"
-              label={t("button.firstName")}
+              label={t("form.lastName")}
               variant="standard"
-              placeholder="Enter Your Last Name"
               helperText={errors.lastName && errors.lastName.message}
             />
           )}
@@ -169,9 +168,8 @@ function Signup() {
               {...field}
               fullWidth
               id="email"
-              label={t("button.email")}
+              label={t("form.email")}
               variant="standard"
-              placeholder="Enter Your email"
               helperText={errors.email && errors.email.message}
             />
           )}
@@ -186,9 +184,9 @@ function Signup() {
               {...field}
               id="password"
               type="password"
-              label={t("button.password")}
+              label={t("form.password")}
               variant="standard"
-              placeholder="Enter Your Password"
+              placeholder={t("formErrors.pwdRegex")}
               helperText={errors.password && errors.password.message}
             />
           )}
@@ -202,9 +200,8 @@ function Signup() {
               {...field}
               id="rePassword"
               type="password"
-              label={t("button.renterPassword")}
+              label={t("form.rePassword")}
               variant="standard"
-              placeholder="Re-enter Your Password"
               helperText={errors.rePassword && errors.rePassword.message}
             />
           )}
@@ -217,15 +214,14 @@ function Signup() {
               {...field}
               type="number"
               id="phoneNumber"
-              label={t("button.phoneNumber")}
+              label={t("form.phoneNumber")}
               variant="standard"
-              placeholder="Enter Your Phone Number"
               helperText={errors.phoneNumber && errors.phoneNumber.message}
             />
           )}
         />
         <FormControl sx={{ w: "50%", minWidth: "182px", ml: 2 }}>
-          <InputLabel id="gender-label">Gender</InputLabel>
+          <InputLabel id="gender-label">{t("form.gender")}</InputLabel>
           <Controller
             name="gender"
             control={control}
@@ -236,12 +232,8 @@ function Signup() {
                 fullWidth
                 id="gender"
                 labelId="gender-label"
-                label="Gender"
                 variant="standard"
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 {genders.map((gender) => (
                   <MenuItem key={gender.value} value={gender.value}>
                     {gender.name}
@@ -254,6 +246,7 @@ function Signup() {
             {errors.gender && errors.gender.message}
           </FormHelperText>
         </FormControl>
+
         <Controller
           name="address"
           control={control}
@@ -262,28 +255,49 @@ function Signup() {
               fullWidth
               {...field}
               id="address"
-              label={t("button.address")}
+              label={t("form.address")}
               variant="standard"
-              placeholder="Re-enter Your Address"
               helperText={errors.address && errors.address.message}
             />
           )}
         />
+        <FormControl>
+          <DemoItem label={t("form.birthDate")}>
+            <Controller
+              name="birthDate"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  {...field}
+                  id="birthDate"
+                  labelId="birthDate-picker"
+                  aria-labelledby="birthDate-picker"
+                  format="DD/MM/YYYY"
+                />
+              )}
+            />
+            <FormHelperText>
+              {errors.birthDate && errors.birthDate.message}
+            </FormHelperText>
+          </DemoItem>
+        </FormControl>
+
         <Button
           type="submit"
           variant="contained"
           color="primary"
+          fullWidth
           sx={{ display: "block", mt: 4, mx: "auto" }}
         >
-          {t("button.joinUs")}
+          {t("button.submit")}
         </Button>
       </Form>
-      <Box textAlign="right">
+      <Box>
         <Typography mt={4} mr={1} display="inline-block">
-          Already A Member
+          {t("form.alreadyMember")}
         </Typography>
         <Link href="/login" color="secondary.main">
-          Login
+          {t("button.login")}
         </Link>
       </Box>
     </Box>

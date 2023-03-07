@@ -1,13 +1,12 @@
 {
   "nav_bar": {
-    "Announcement": "Free Shipping on Orders Over 1000$",
-    
+    "Announcement": "Free Shipping on Orders Over {{valUsd, currency(USD)}}",
+
     "weekendBoots": "Weekend Boots",
-    "Terrace_Clogs": "Terrace Clogs",
-    "Accessories": "Accessories",
-    "Shop_All": "Shop All",
-    "Values": "Values"
-    
+    "terraceClogs": "Terrace Clogs",
+    "accessories": "Accessories",
+    "shopAll": "Shop All",
+    "values": "Values"
   },
   "home": {
     "newCollection": "The New Collection is Here.",
@@ -26,83 +25,72 @@
     "addToCart": "Add To Cart",
     "shopNow": "Shop Now",
     "joinUs": "Join us",
-    "submit":"Submit",
+    "submit": "Submit",
     "login": "Login",
-
-    "logout": "Logout"
-   "signup":"Sign Up",
+    "logout": "Logout",
+    "signup": "Sign Up",
     "profile": "Profile",
-
     "profileSettings": "Profile Settings",
-
-    "favorites": "Favorites",
-    
-    
+    "favorites": "Favorites"
   },
   "product": {
     "name": "Name",
     "price": "{{valUsd, currency(USD)}}",
-    "productName":"Product Name",
-
-    "productPrice":"Product Price",
-
-    "category":"Category",
-
-    "quantity":"Quantity",
-
-    "Price":"Price",
-
-    "discountedPrice":"Discounted Price",
-
-    "discountPercentage":"Discount Percentage",
-
-    "sku":"SKU"
+    "productName": "Product Name",
+    "productPrice": "Product Price",
+    "category": "Category",
+    "quantity": "Quantity",
+    "Price": "Price",
+    "discountedPrice": "Discounted Price",
+    "discountPercentage": "Discount Percentage",
+    "sku": "SKU"
   },
-"footer":{
-    "ourShop":"Our Shop",
-    "help":"Help",
-"sizeGuides":"Size Guides",
-"shippingInfo":"Shipping Information",
-"refundPolicy":"Refund Policy",
-"faq":"FAQ",
-"aboutUs":"About Us",
-"terms":"Terms Of Service",
-"contact":"Contact Us",
-"follow":"Follow Our Latest News"
+  "store": {
+    "storeHero": "The Weekend Boot",
+    "storeHeroSub": "Made with 98% environmentally progressive materials.",
+    "4in1h2": "The 4-in-1 Hiking Boot",
+    "4in1p": "Comfy, cosy and seriously cute. This 4-in-1 hiking boot is a go-to all year outdoor staple made for the trails, parks and city streets. They are water-resistant and easy to clean - from summer through winter they’ve got you covered. Each pair is vegan, cruelty free and made with recycled ocean plastic."
+  },
 
-},
-  "form":{
-    "firstName":"First Name",
-    "lastName":"Last Name",
+  "footer": {
+    "ourShop": "Our Shop",
+    "help": "Help",
+    "sizeGuides": "Size Guides",
+    "shippingInfo": "Shipping Information",
+    "refundPolicy": "Refund Policy",
+    "faq": "FAQ",
+    "aboutUs": "About Us",
+    "terms": "Terms Of Service",
+    "contact": "Contact Us",
+    "follow": "Follow Our Latest News"
+  },
+  "form": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
     "email": "Email",
-    "password":"Password",
-    "rePassword":"Renter Password",
-    "address":"Address",
-    "phoneNumber":"Phone Number",
-    "gender":"Gender",
-    "birthDate":"BirthDate",
-    "alreadyMember":"Already a Member",
-
-    "notMember":"Not A Member"
-    
-    
-    
-    
-    },
-  "formErrors":{
-  "fieldRequired":"This Field Is Required",
-  "fieldMin":"This Field Can't be less than {{val}} Characters",
-    "fieldMax":"This Field Can't be more than {{val}} Characters",
-    "notValid":"Not A Valid {{val}}",
-    "pwdRegex":"Password Must Be At Least 8 Characters Containing A Capital Letter And A Special Character",
-    "notValidPwd":"This Password Isn't correct",
-"pwdDoesntMatch":"Password Doesn't Match",
-    
-
-    "notValidEmail":"Enter A Vallid Email",
-
-    "notRegEmail":"This Email Is Not Registered",
-
-"notVallidPhone":"Enter A Valid Phone Number"
+    "password": "Password",
+    "rePassword": "Renter Password",
+    "address": "Address",
+    "phoneNumber": "Phone Number",
+    "gender": "Gender",
+    "birthDate": "BirthDate",
+    "alreadyMember": "Already a Member",
+    "notMember": "Not A Member",
+    "male": "Male",
+    "female": "Female"
+  },
+  "formErrors": {
+    "fieldRequired": "This Field Is Required",
+    "fieldMin": "This Field Can't be less than {{val}} Characters",
+    "fieldMax": "This Field Can't be more than {{val}} Characters",
+    "notValid": "Not A Valid {{val}}",
+    "pwdRegex": "Password Must Be At Least 8 Characters Containing A Capital Letter And A Special Character",
+    "notValidPwd": "This Password Isn't correct",
+    "pwdDoesntMatch": "Password Doesn't Match",
+    "notValidEmail": "Enter A Vallid Email",
+    "notRegEmail": "This Email Is Not Registered",
+    "notVallidPhone": "Enter A Valid Phone Number",
+    "dateBefore": "Date Can't Be Before 1/1/1990",
+    "dateAfter": "Date Can't Be in the Future"
   }
 }
