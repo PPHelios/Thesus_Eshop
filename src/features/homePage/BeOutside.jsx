@@ -12,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Zoom from '@mui/material/Zoom';
 
 function BeOutside() {
   const {
@@ -41,6 +42,9 @@ function BeOutside() {
           gap: 2,
         }}
       >
+           
+     
+         <Zoom  in={true} appear timeout= {2000} >
         <Img
           src={require(`../../assets/images/beOutside1.webp`)}
           sx={{
@@ -49,8 +53,10 @@ function BeOutside() {
             objectFit: "cover",
             objectPosition: "0% 5%",
           }}
-          alt=""
+          alt="woman waring our beige weekend boot"
         />
+</Zoom>
+<Zoom  in={true} appear timeout= {2000} style={{ transitionDelay: "1000ms" }}>
         <Img
           src={require(`../../assets/images/beOutside2.webp`)}
           sx={{
@@ -59,8 +65,10 @@ function BeOutside() {
             objectFit: "cover",
             objectPosition: "0% 65%",
           }}
-          alt=""
+          alt="woman waring our beige clog "
         />
+        </Zoom>
+        <Zoom  in={true} appear timeout= {2000} style={{ transitionDelay: "2000ms" }}>
         <Img
           src={require(`../../assets/images/beOutside3.webp`)}
           sx={{
@@ -69,8 +77,9 @@ function BeOutside() {
             objectFit: "cover",
             objectPosition: "0% 75%",
           }}
-          alt=""
+          alt="woman waring our grey weekend boot"
         />
+        </Zoom>
       </Stack>
       <Box backgroundColor="#efefef" mt={4} p={4} pl={8}>
         <Typography variant="h3" color="primary.main" width="60%">

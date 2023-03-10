@@ -1,6 +1,6 @@
 {
   "nav_bar": {
-    "Announcement": "Free Shipping on Orders Over {{valUsd, currency(USD)}}",
+    "Announcement": "Free Shipping on Orders Over {{val}} LE",
 
     "weekendBoots": "Weekend Boots",
     "terraceClogs": "Terrace Clogs",
@@ -35,21 +35,25 @@
   },
   "product": {
     "name": "Name",
-    "price": "{{valUsd, currency(USD)}}",
+    "price": "{{val}} LE",
     "productName": "Product Name",
     "productPrice": "Product Price",
     "category": "Category",
     "quantity": "Quantity",
+    "soldOut":"Out Of Stock",
     "Price": "Price",
     "discountedPrice": "Discounted Price",
     "discountPercentage": "Discount Percentage",
     "sku": "SKU"
   },
   "store": {
-    "storeHero": "The Weekend Boot",
-    "storeHeroSub": "Made with 98% environmentally progressive materials.",
+    "storeBootsHero": "The Weekend Boot",
+    "storeBootsHeroSub": "Made with 98% environmentally progressive materials.",
+    "storeClogsHero": "The Terrus",
+    "storeClogsHeroSub": "Made with 99% natural and recycled materials.",
     "4in1h2": "The 4-in-1 Hiking Boot",
-    "4in1p": "Comfy, cosy and seriously cute. This 4-in-1 hiking boot is a go-to all year outdoor staple made for the trails, parks and city streets. They are water-resistant and easy to clean - from summer through winter they’ve got you covered. Each pair is vegan, cruelty free and made with recycled ocean plastic."
+    "4in1p": "Comfy, cosy and seriously cute. This 4-in-1 hiking boot is a go-to all year outdoor staple made for the trails, parks and city streets. They are water-resistant and easy to clean - from summer through winter they’ve got you covered. Each pair is vegan, cruelty free and made with recycled ocean plastic.",
+    "clogsH1":"Easy, Comfy Slip On"
   },
 
   "footer": {

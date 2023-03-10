@@ -26,8 +26,8 @@ import utc from "dayjs/plugin/utc";
 
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./features/homePage/HomePage";
-import Signup from "./features/authentication/Signup";
-import Login from "./features/authentication/Login";
+import Signup from "./features/Authentication/Signup";
+import Login from "./features/Authentication/Login";
 import Store from "./features/store/Store";
 
 dayjs.extend(utc);
@@ -48,7 +48,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/store" element={<Store />} />
+          <Route path="/weekendBoots" element={<Store pageProduct={"weekendBoots"} />} />
+          <Route path="/terraceClogs" element={<Store pageProduct={"terraceClogs"} />} />
         </Route>
       </>
     )

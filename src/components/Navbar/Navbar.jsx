@@ -30,6 +30,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
+import {Img} from "../muiStyledComponents/muiStyledComponents";
 
 function Navbar() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -75,17 +76,17 @@ function Navbar() {
 
   const navItems = navLinks.map((item) => {
     const menuItems = item?.links?.map((subItem) => {
-      const icon = subItem?.icon;
       return (
         <ListItem
           key={subItem.label}
-          button
-          component={Link}
           sx={{ pl: 4 }}
-          href={subItem.link}
+      
           onClick={() => setMobileDrawerOpen(false)}
         >
-          <ListItemText primary={t(`button.${subItem.label}`)} />
+          <Link     href={subItem.link} underline="none">
+           <ListItemText primary={t(`button.${subItem.label}`)} />
+          </Link>
+         
         </ListItem>
       );
     });
@@ -109,7 +110,6 @@ function Navbar() {
     return (
       <ListItem
         key={item.label}
-        button
         component={Link}
         disablePadding
         href={item.link}
@@ -135,7 +135,7 @@ function Navbar() {
           }}
         >
           <Typography align="center" variant="h5" component="p">
-            {t("nav_bar.Announcement", { valUsd: 50, valEgp: 1000 })}
+            {t("nav_bar.Announcement", { val: 50})}
           </Typography>
         </Stack>
         {/**************** Navbar ****************/}
@@ -161,27 +161,34 @@ function Navbar() {
           </IconButton>
           {/**************** Logo ****************/}
           <Link href="/" component={Link}>
-            <img
+            <Img
               src={require("../../assets/images/Thesus_logo.webp")}
               alt="company logo"
-              width="90"
+             
+              sx={{ width:"90px",
+              minWidth:"90px"}}
             />
           </Link>
           {/**************** Humburger Nav Menu ****************/}
-          <List sx={{ display: { xs: "none", sm: "block" } }}>
+          <List sx={{ display: { xs: "none", sm: "inline-flex" } }}>
             {navLinks
               .filter((item) => !item.links)
               .map((item) => (
-                <Button
+                <ListItem  key={item.label} disablePadding>
+                <Link
                   component={Link}
-                  key={item.label}
                   sx={{
                     color: "primary.main",
+                    width:"max-content",
+                    textDecoration:"none",
+                    padding: "calc(0.2rem + 0.7vw)"
+                    
                   }}
                   href={item.link}
                 >
                   {t(`nav_bar.${item.label}`)}
-                </Button>
+                </Link>
+                </ListItem>
               ))}
           </List>
           {/**************** Profile Bar ****************/}
@@ -257,8 +264,6 @@ function Navbar() {
                 <Divider />
                 <List>
                   <ListItem
-                    button
-                    component={Link}
                     disablePadding
                     href="/"
                     onClick={() => setProfilePopoverOpen(null)}
@@ -269,7 +274,7 @@ function Navbar() {
                     <ListItemText primary={t(`button.profileSettings`)} />
                   </ListItem>
                   <ListItem
-                    button
+                    
                     component={Link}
                     href="/"
                     disablePadding
@@ -281,7 +286,7 @@ function Navbar() {
                     <ListItemText primary={t(`button.favorites`)} />
                   </ListItem>
                   <ListItem
-                    button
+                    
                     component={Link}
                     href="/login"
                     disablePadding
@@ -293,7 +298,7 @@ function Navbar() {
                     <ListItemText primary={t(`button.login`)} />
                   </ListItem>
                   <ListItem
-                    button
+                    
                     component={Link}
                     href="/login"
                     disablePadding
@@ -330,7 +335,7 @@ function Navbar() {
           <List
             sx={{
               width: "100%",
-              height: "100%",
+              height: "max-content",
               maxWidth: 360,
               bgcolor: "secondary.light",
               paddingTop: 5,

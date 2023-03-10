@@ -20,34 +20,24 @@ const products = [
   //   alt: "Beige Clog",
   // },
   {
-    id: 3,
+    id: 1,
     name: "weekendBoots",
-    nameAr: "حذاء فرح لعطله نهايه الاسبوع",
+
     description: "bootDescription",
-    price: 2400,
-    discountedPrice: 0,
-    discounrtPercentage: 0,
-    onSale: false,
-    soldout: true,
-    img: "boot3",
+   
+    img: "bootRed,w_983",
     alt: "Farah Weekend red Boot",
-    sku: "1234567",
-    stockQuantity: 10,
+
   },
   {
-    id: 3,
+    id: 2,
     name: "terraceClogs",
-    nameAr: "حذاء فرح لعطله نهايه الاسبوع",
+  
     description: "clogDescription",
-    price: 2400,
-    discountedPrice: 0,
-    discounrtPercentage: 0,
-    onSale: false,
-    soldout: true,
-    img: "boot3",
-    alt: "Farah Weekend red Boot",
-    sku: "1234567",
-    stockQuantity: 10,
+   
+    img: "clog1",
+    alt: "Beige Clog",
+
   },
 ];
 export default function OurProducts() {
@@ -55,7 +45,7 @@ export default function OurProducts() {
   return (
     <Box>
       <Box mt="2rem" p="2rem" backgroundColor="primary.main">
-        <Typography variant="h1" component="h2" color="secondary.light">
+        <Typography variant="h2" component="h2" color="secondary.light">
           {t("home.socially")}
         </Typography>
       </Box>

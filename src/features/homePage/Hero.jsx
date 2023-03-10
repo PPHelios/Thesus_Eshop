@@ -15,17 +15,17 @@ function Hero() {
   return (
     <Box as="main" sx={{ position: "relative" }}>
       <Img
-        sizes="(max-width: 1380px) 100vw, 1380px"
+        sizes="(max-width: 1380px) 100vw,
+        1380px"
+          src={spring1380}
         srcset={`${spring350} 350w,
           ${spring941} 941w,
 ${spring1232} 1232w,
-${spring1380} 1380w`}
-        src={spring1380}
+${spring1380} 1380w`}      
         alt="new shoes picture"
         sx={{
           width: "100%",
-          maxHeight: "70vh",
-          maxHeight: "87vh",
+          maxHeight: "96vh",
           display: "block",
           mx: "auto",
           objectFit: "cover",
