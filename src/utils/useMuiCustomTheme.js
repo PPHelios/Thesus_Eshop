@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 // Changing mui Link component to react router Link
 import {
   Link as RouterLink,
@@ -28,11 +28,12 @@ LinkBehavior.propTypes = {
   ]).isRequired,
 };
 function useMuiCustomTheme() {
+  console.log("theme")
   const colorMode = useStore((state) => state.user.theme);
   const { i18n } = useTranslation();
   const docDir = i18n.dir();
 
-  let theme = createTheme({
+  let theme = useMemo(()=>createTheme({
     direction: docDir, // Both here and <body dir="rtl">
     breakpoints: {
       values: {
@@ -44,6 +45,10 @@ function useMuiCustomTheme() {
       },
     },
     palette: {
+      // Disabled button color
+      action: {
+        disabled: 'grey'
+      },
       mode: colorMode,
       ...(colorMode === "light"
         ? {
@@ -60,13 +65,39 @@ function useMuiCustomTheme() {
               dark: "#95125B",
               contrastThreshold: 4.5,
             },
+            text: {
+              primary: "#123026",
+              secondary: "#123026",
+            }
             // divider: amber[200],
-            // text: {
-            //   primary: grey[900],
-            //   secondary: grey[800],
-            // },
+           
           }
-        : {}),
+        : {
+          action: {
+            disabled: '#444',
+            active:"#fff",
+            selected:"#fff"
+
+          },
+          primary: {
+            main: "rgba(255, 255, 255, 0.08)",
+            light: "rgba(255, 255, 255, 0.08)",
+            dark: "gray",
+            contrastThreshold: 4.5,
+          },
+          secondary: {
+            main: "#95125B",
+            light: "gray",
+            dark: "rgba(255, 255, 255, 0.16)",
+            contrastThreshold: 4.5,
+          },
+          text: {
+            primary: '#fff',
+            secondary: "#fff",
+            disabled:"#123026",
+          },
+
+        }),
     },
     components: {
       MuiLink: {
@@ -75,6 +106,17 @@ function useMuiCustomTheme() {
         },
       },
       MuiButtonBase: {
+        styleOverrides:{
+               // Disabled button background
+          root:{
+            "&.Mui-disabled": {
+              backgroundColor: "#0C211A",
+            }
+        
+          }
+          
+        },
+       
         defaultProps: {
           LinkComponent: LinkBehavior,
         },
@@ -101,7 +143,7 @@ function useMuiCustomTheme() {
         },
       },
     },
-  });
+  }),[colorMode])
 
   theme = responsiveFontSizes(theme);
   return theme;

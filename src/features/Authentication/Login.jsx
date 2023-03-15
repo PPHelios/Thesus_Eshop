@@ -6,8 +6,16 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-
+import { useState } from "react";
+import { useStore } from "../../store/useStore";
+import { useNavigate } from "react-router-dom";
 function Login() {
+  const [error, setError] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+  const { t } = useTranslation("common");
+  const login = useStore(state => state.login)
+  const loggedInUser = useStore((state) => state.user?.firstName);
+  const navigate= useNavigate()
   const {
     handleSubmit,
     control,
@@ -20,9 +28,23 @@ function Login() {
     },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    setSubmitting(true)
+     setError("")
+   try{
+     const loggedIn = await login(data)
+     if (loggedIn){
+       setSubmitting(false)
+      // navigate("/")
+     }
+   } catch(err) {
+     setError(err.message)
+     setSubmitting(false)
+   }
+  
+ }
 
-  const { t } = useTranslation("common");
+
 
   return (
     <Box
@@ -32,7 +54,9 @@ function Login() {
       p={4}
       pt={1}
       as="section"
+    
     >
+      {!loggedInUser ? <>
       <Typography variant="h1" textAlign="center" mb={4}>
         {t("button.login")}
       </Typography>
@@ -70,6 +94,7 @@ function Login() {
             <TextField
               {...field}
               fullWidth
+              type="password"
               id="password"
               label={t("form.password")}
               variant="standard"
@@ -84,11 +109,13 @@ function Login() {
           variant="contained"
           color="primary"
           fullWidth
-          sx={{ display: "block", mt: 4, mx: "auto" }}
+          disabled={submitting}
+          sx={{ display: "block", mt: 4, mx: "auto" ,color:"white"}}
         >
           {t("button.submit")}
         </Button>
       </Form>
+      {error && <Typography variant="body1" as="p" color="red">{error}</Typography>}
       <Box>
         <Typography mt={4} mr={1} display="inline-block">
           {t("form.notMember")}
@@ -97,6 +124,7 @@ function Login() {
           {t("button.signup")}
         </Link>
       </Box>
+     </>:<Typography variant="h2" textAlign="center" color="text.secondary">You are Already Logged In</Typography>}
     </Box>
   );
 }

@@ -14,7 +14,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Collapse from "@mui/material/Collapse";
 import Stack from "@mui/material/Stack";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -30,13 +29,16 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
-import {Img} from "../muiStyledComponents/muiStyledComponents";
+import { Img } from "../muiStyledComponents/muiStyledComponents";
+import { useStore } from "../../store/useStore";
 
 function Navbar() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [listDrawerOpen, setListDrawerOpen] = useState(false);
   const [profilePopoverOpen, setProfilePopoverOpen] = useState(null);
-
+  const loggedInUser = useStore((state) => state.user?.firstName);
+  const logout = useStore((state) => state.logout);
+  const theme = useStore((state) => state.user.theme);
   const { t } = useTranslation("common");
 
   const handleMenuDrawerToggle = () => {
@@ -61,14 +63,24 @@ function Navbar() {
       link: "/user/profile",
       label: "profile",
       links: [
-        { link: "/user/profile/settings", label: "profileSettings", icon: "" },
-        { link: "/user/favorites", label: "favorites", icon: "" },
-        { link: "/login", label: "login", icon: "" },
-        { link: "/logout", label: "logout", icon: "LogoutOutlinedIcon" },
+        {
+          link: "/user/profile/settings",
+          label: "profileSettings",
+          icon: "",
+          show: loggedInUser,
+        },
+        { link: "/user/favorites", label: "favorites", icon: "", show: true },
+        { link: "/login", label: "login", icon: "", show: !loggedInUser },
+        {
+          link: "#",
+          label: "logout",
+          icon: "LogoutOutlinedIcon",
+          show: loggedInUser,
+        },
       ],
     },
     { link: "/weekendBoots", label: "weekendBoots" },
-    { link: "/terraceClogs", label: "terraceClogs" },
+    { link: "/terrusClogs", label: "terrusClogs" },
     { link: "/accessories", label: "accessories" },
     { link: "/shopAll", label: "shopAll" },
     { link: "/values", label: "values" },
@@ -76,23 +88,30 @@ function Navbar() {
 
   const navItems = navLinks.map((item) => {
     const menuItems = item?.links?.map((subItem) => {
-      return (
-        <ListItem
-          key={subItem.label}
-          sx={{ pl: 4 }}
-      
-          onClick={() => setMobileDrawerOpen(false)}
-        >
-          <Link     href={subItem.link} underline="none">
-           <ListItemText primary={t(`button.${subItem.label}`)} />
-          </Link>
-         
-        </ListItem>
-      );
+      if (subItem.show) {
+        return (
+          <ListItem
+            key={subItem.label}
+            sx={{ pl: 4 }}
+            onClick={
+              subItem.label === "logout"
+                ? () => {
+                    setProfilePopoverOpen(null);
+                    logout();
+                  }
+                : () => setMobileDrawerOpen(false)
+            }
+          >
+            <Link href={subItem.link} underline="none">
+              <ListItemText primary={t(`button.${subItem.label}`)} />
+            </Link>
+          </ListItem>
+        );
+      }
     });
     if (menuItems) {
       return (
-        <Box key={item.label}>
+        <Box key={item.label} color="text.primary">
           <ListItem disablePadding>
             <ListItemButton onClick={handleListDrawerToggle} height="20">
               <ListItemText primary={t(`button.${item.label}`)} />
@@ -113,6 +132,7 @@ function Navbar() {
         component={Link}
         disablePadding
         href={item.link}
+        color="text.primary"
         onClick={() => setMobileDrawerOpen(false)}
       >
         <ListItemButton sx={{ textAlign: "center" }}>
@@ -134,8 +154,8 @@ function Navbar() {
             alignItems: "center",
           }}
         >
-          <Typography align="center" variant="h5" component="p">
-            {t("nav_bar.Announcement", { val: 50})}
+          <Typography align="center" variant="h6" component="p">
+            {t("nav_bar.Announcement", { val: 1000 })}
           </Typography>
         </Stack>
         {/**************** Navbar ****************/}
@@ -143,7 +163,7 @@ function Navbar() {
           sx={{
             height: 60,
             backgroundColor: "secondary.light",
-            color: "primary.main",
+            color:"text.primary",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -162,11 +182,12 @@ function Navbar() {
           {/**************** Logo ****************/}
           <Link href="/" component={Link}>
             <Img
-              src={require("../../assets/images/Thesus_logo.webp")}
+              src={theme==="light"?require("../../assets/images/Thesus_logo.webp"):require("../../assets/images/ThesusWhite.webp")}
               alt="company logo"
-             
-              sx={{ width:"90px",
-              minWidth:"90px"}}
+              sx={{
+                width: "90px",
+                minWidth: "90px",
+              }}
             />
           </Link>
           {/**************** Humburger Nav Menu ****************/}
@@ -174,20 +195,19 @@ function Navbar() {
             {navLinks
               .filter((item) => !item.links)
               .map((item) => (
-                <ListItem  key={item.label} disablePadding>
-                <Link
-                  component={Link}
-                  sx={{
-                    color: "primary.main",
-                    width:"max-content",
-                    textDecoration:"none",
-                    padding: "calc(0.2rem + 0.7vw)"
-                    
-                  }}
-                  href={item.link}
-                >
-                  {t(`nav_bar.${item.label}`)}
-                </Link>
+                <ListItem key={item.label} disablePadding>
+                  <Link
+                    component={Link}
+                    sx={{
+                      color:"text.primary",
+                      width: "max-content",
+                      textDecoration: "none",
+                      padding: "calc(0.2rem + 0.7vw)",
+                    }}
+                    href={item.link}
+                  >
+                    {t(`nav_bar.${item.label}`)}
+                  </Link>
                 </ListItem>
               ))}
           </List>
@@ -195,6 +215,7 @@ function Navbar() {
           <Box
             sx={{
               display: "flex",
+              color:"text.primary",
               flexGrow: 0,
               flexDirection: "row",
               justifyContent: "center",
@@ -211,7 +232,7 @@ function Navbar() {
               sx={{ p: 0 }}
               aria-label="shopping cart"
             >
-              <Badge badgeContent={4} color="primary" invisible={false && true}>
+              <Badge badgeContent={4} color="primary" invisible={false && true} sx={{"& .MuiBadge-colorPrimary":{color:"white"}}}>
                 <ShoppingBagOutlinedIcon />
               </Badge>
             </IconButton>
@@ -262,53 +283,67 @@ function Navbar() {
                   <ThemeToggler />
                 </Box>
                 <Divider />
-                <List>
-                  <ListItem
-                    disablePadding
-                    href="/"
-                    onClick={() => setProfilePopoverOpen(null)}
-                  >
-                    <ListItemIcon>
-                      <ManageAccountsOutlinedIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={t(`button.profileSettings`)} />
-                  </ListItem>
-                  <ListItem
-                    
-                    component={Link}
-                    href="/"
-                    disablePadding
-                    onClick={() => setProfilePopoverOpen(null)}
-                  >
-                    <ListItemIcon>
-                      <FavoriteBorderOutlinedIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={t(`button.favorites`)} />
-                  </ListItem>
-                  <ListItem
-                    
-                    component={Link}
-                    href="/login"
-                    disablePadding
-                    onClick={() => setProfilePopoverOpen(null)}
-                  >
-                    <ListItemIcon m={0}>
-                      <LoginOutlinedIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={t(`button.login`)} />
-                  </ListItem>
-                  <ListItem
-                    
-                    component={Link}
-                    href="/login"
-                    disablePadding
-                    onClick={() => setProfilePopoverOpen(null)}
-                  >
-                    <ListItemIcon>
-                      <LogoutOutlinedIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={t(`button.logout`)} />
-                  </ListItem>
+                <List color="text.primary">
+                  {loggedInUser && (
+                    <ListItem
+                      color="inherit"
+                      disablePadding
+                      href="/"
+                      onClick={() => setProfilePopoverOpen(null)}
+                    >
+                      <ListItemIcon>
+                        <ManageAccountsOutlinedIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={t(`button.profileSettings`)} />
+                    </ListItem>
+                  )}
+                  {loggedInUser && (
+                    <ListItem
+                      color="inherit"
+                      component={Link}
+                      href="/"
+                      disablePadding
+                      onClick={() => setProfilePopoverOpen(null)}
+                    >
+                      <ListItemIcon>
+                        <FavoriteBorderOutlinedIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={t(`button.favorites`)} />
+                    </ListItem>
+                  )}
+
+                  {!loggedInUser && (
+                    <ListItem
+                      color="inherit"
+                      component={Link}
+                      href="/login"
+                      disablePadding
+                      onClick={() => setProfilePopoverOpen(null)}
+                    >
+                      <ListItemIcon m={0}>
+                        <LoginOutlinedIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={t(`button.login`)} />
+                    </ListItem>
+                  )}
+
+                  {loggedInUser && (
+                    <ListItem
+                      color="inherit"
+                      component={Link}
+                      href="#"
+                      disablePadding
+                      onClick={() => {
+                        setProfilePopoverOpen(null);
+                        logout();
+                      }}
+                    >
+                      <ListItemIcon>
+                        <LogoutOutlinedIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={t(`button.logout`)} />
+                    </ListItem>
+                  )}
                 </List>
               </Stack>
             </Popover>
@@ -336,6 +371,7 @@ function Navbar() {
             sx={{
               width: "100%",
               height: "max-content",
+              minHeight: "100vh",
               maxWidth: 360,
               bgcolor: "secondary.light",
               paddingTop: 5,

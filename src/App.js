@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useMemo } from "react";
+import { Suspense, useCallback, useEffect, useMemo,lazy } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Route,
@@ -24,17 +24,24 @@ import "dayjs/locale/ar";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
-import MainLayout from "./layouts/MainLayout";
-import HomePage from "./features/homePage/HomePage";
-import Signup from "./features/Authentication/Signup";
-import Login from "./features/Authentication/Login";
-import Store from "./features/store/Store";
+import { useStore } from "./store/useStore";
+
+const MainLayout = lazy(() => import('./layouts/MainLayout'));
+const HomePage = lazy(() => import('./features/homePage/HomePage'));
+const Signup = lazy(() => import('./features/Authentication/Signup'));
+const Login = lazy(() => import('./features/Authentication/Login'));
+const Store = lazy(() => import('./features/store/Store'));
+
+//import MainLayout from "./layouts/MainLayout";
 
 dayjs.extend(utc);
 
 function App() {
   const theme = useMuiCustomTheme();
-
+const getProducts= useStore(state => state.getProducts)
+useEffect(()=>{
+  getProducts()
+},[])
   const { i18n } = useTranslation();
   const docDir = i18n.dir();
   useEffect(() => {
@@ -44,12 +51,12 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<MainLayout />} >
+          <Route path="/" element={<HomePage />}  />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/weekendBoots" element={<Store pageProduct={"weekendBoots"} />} />
-          <Route path="/terraceClogs" element={<Store pageProduct={"terraceClogs"} />} />
+          <Route path="/weekendBoots" element={<Store pageProduct={"Weekend Boot"} pageTitle={"4in1h2"} pageParagraph={"4in1p"}/>} />
+          <Route path="/terrusClogs" element={<Store pageProduct={"Terrus Clog"} pageTitle={"clogsH1"} />} />
         </Route>
       </>
     )

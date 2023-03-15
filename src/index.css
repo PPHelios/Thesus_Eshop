@@ -4,3 +4,8 @@ img {
 .MuiFormHelperText-root {
   font-size: 2rem;
 }
+.square {
+  width: 5rem;
+  height: 5rem;
+  background-color: #56ccf2;
+}

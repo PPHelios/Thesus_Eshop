@@ -111,6 +111,7 @@ export const userSlice = (set, get) => ({
             state.user = user;
           })
         );
+        return true
       }
     } catch (err) {
       throw new Error(err.message);
@@ -122,7 +123,7 @@ export const userSlice = (set, get) => ({
     console.log(res);
     set(
       produce((state) => {
-        state.user = { cart: [] };
+        state.user = { cart: [],theme:get().user.theme };
       })
     );
     set(

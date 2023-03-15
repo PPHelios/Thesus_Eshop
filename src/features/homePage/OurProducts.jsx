@@ -3,45 +3,14 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { Img } from "../../components/muiStyledComponents/muiStyledComponents";
+import { useStore } from "../../store/useStore";
 
-const products = [
-  // {
-  //   id: 1,
-  //   name: "weekendBoots",
-  //   description: "bootDescription",
-  //   img: "boot2",
-  //   alt: "Marlin Weekend blue Boot with orange laces",
-  // },
-  // {
-  //   id: 0,
-  //   name: "terraceClogs",
-  //   description: "clogDescription",
-  //   img: "clog1",
-  //   alt: "Beige Clog",
-  // },
-  {
-    id: 1,
-    name: "weekendBoots",
-
-    description: "bootDescription",
-   
-    img: "bootRed,w_983",
-    alt: "Farah Weekend red Boot",
-
-  },
-  {
-    id: 2,
-    name: "terraceClogs",
-  
-    description: "clogDescription",
-   
-    img: "clog1",
-    alt: "Beige Clog",
-
-  },
-];
+// [{x:[]},{y:[]}]
 export default function OurProducts() {
   const { t } = useTranslation("common");
+
+const filteredProducts = useStore(state=>state.products.filter(item => item.ourProducts===true)) 
+
   return (
     <Box>
       <Box mt="2rem" p="2rem" backgroundColor="primary.main">
@@ -58,10 +27,10 @@ export default function OurProducts() {
           alignItems: "stretch",
         }}
       >
-        {products.map((item) => {
+        {filteredProducts && filteredProducts.map((item) => {
           return (
             <Stack
-              key={item.id}
+              key={item._id}
               justifyContent="space-between"
               alignItems="flex-start"
               backgroundColor="#efefef"
@@ -74,7 +43,7 @@ export default function OurProducts() {
                   mb={1}
                   color="primary.main"
                 >
-                  {t(`nav_bar.${item.name}`)}
+               {item.category}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -82,13 +51,14 @@ export default function OurProducts() {
                   color="primary.main"
                   width="50%"
                 >
-                  {t(`home.${item.description}`)}
+                  {item.description}
                 </Typography>
               </Box>
 
               <Img
-                src={require(`../../assets/images/${item.img}.webp`)}
+                src={require(`../../assets/images/${item.img},w_983.webp`)}
                 alt={item.alt}
+                loading="lazy"
                 sx={{
                   width: "300px",
                   height: "300px",
@@ -116,6 +86,7 @@ export default function OurProducts() {
         src={require("../../assets/images/mentionedBy.webp")}
         alt="site mentioned in these magaines"
         sx={{ width: "80%", mx: "auto", my: 2, display: "block" }}
+        loading="lazy"
       />
     </Box>
   );

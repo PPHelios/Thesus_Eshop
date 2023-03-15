@@ -1,4 +1,4 @@
-import { useTheme, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { useStore } from "../../store/useStore";
 
@@ -58,7 +58,7 @@ export default function ThemeToggler() {
   return (
     <MaterialUISwitch
       onClick={() => toggleColorMode()}
-      defaultChecked={checked}
+      checked={checked || false}
     />
   );
 }

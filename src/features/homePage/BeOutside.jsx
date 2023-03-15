@@ -12,7 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Zoom from '@mui/material/Zoom';
+import { motion, Variants } from "framer-motion"
 
 function BeOutside() {
   const {
@@ -27,24 +27,47 @@ function BeOutside() {
   });
   const onSubmit = (data) => console.log(data);
   const { t } = useTranslation("common");
-  console.log(errors.userEmail?.message);
+
+  const cardVariants = {
+    offscreen: {
+      opacity:0,
+      x: 100
+    },
+    onscreen: {
+      opacity:1,
+      x: 0,
+   // rotate: -10,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 2
+      }
+    }
+  }
 
   return (
-    <Box px="1rem">
-      <Typography variant="h2" mb={2} color="primary.main" fontWeight="400">
+    <Box px="1rem"  >
+      <Typography variant="h2" component={motion.div} variants={cardVariants} initial="offscreen"
+    whileInView="onscreen"
+    viewport={{ once: true, amount: 1, }} mb={2} color="primary.main" fontWeight="400">
         {t("home.beOutside")}
       </Typography>
+
+
+
       <Stack
+     
         sx={{
           flexDirection: { sm: "row" },
           justifyContent: "center",
           alignItems: "center",
           gap: 2,
         }}
+       
       >
            
      
-         <Zoom  in={true} appear timeout= {2000} >
+     
         <Img
           src={require(`../../assets/images/beOutside1.webp`)}
           sx={{
@@ -54,9 +77,9 @@ function BeOutside() {
             objectPosition: "0% 5%",
           }}
           alt="woman waring our beige weekend boot"
+          loading="lazy"
         />
-</Zoom>
-<Zoom  in={true} appear timeout= {2000} style={{ transitionDelay: "1000ms" }}>
+
         <Img
           src={require(`../../assets/images/beOutside2.webp`)}
           sx={{
@@ -66,9 +89,9 @@ function BeOutside() {
             objectPosition: "0% 65%",
           }}
           alt="woman waring our beige clog "
+          loading="lazy"
         />
-        </Zoom>
-        <Zoom  in={true} appear timeout= {2000} style={{ transitionDelay: "2000ms" }}>
+
         <Img
           src={require(`../../assets/images/beOutside3.webp`)}
           sx={{
@@ -78,8 +101,9 @@ function BeOutside() {
             objectPosition: "0% 75%",
           }}
           alt="woman waring our grey weekend boot"
+          loading="lazy"
         />
-        </Zoom>
+
       </Stack>
       <Box backgroundColor="#efefef" mt={4} p={4} pl={8}>
         <Typography variant="h3" color="primary.main" width="60%">

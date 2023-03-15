@@ -10,9 +10,11 @@ import spring1380 from "../../assets/images/2023_spring_pink_tzpwlq_c_scale,w_13
 import Button from "@mui/material/Button";
 import { Img } from "../../components/muiStyledComponents/muiStyledComponents";
 
+
 function Hero() {
   const { t } = useTranslation("common");
   return (
+
     <Box as="main" sx={{ position: "relative" }}>
       <Img
         sizes="(max-width: 1380px) 100vw,
@@ -32,6 +34,11 @@ ${spring1380} 1380w`}
           objectPosition: "0 35%",
         }}
       />
+
+
+ 
+
+
       <Stack
         sx={{
           width: { xs: "80%", sm: "50%", lg: "40%" },
@@ -43,26 +50,43 @@ ${spring1380} 1380w`}
           color: "primary.main",
           justifyContent: "flex-start",
           gap: "3vw",
+
         }}
+    
       >
+
+
+
+
+
         <Typography
           variant="h2"
           as="h2"
           color="inherit"
-          sx={{ fontWeight: 500 }}
+          sx={{ fontWeight: 500,  }}
+      
         >
           {t("home.newCollection")}
         </Typography>
+    
+
+   
         <Box>
-          <Typography variant="h5" as="p" color="inherit">
+          <Typography variant="h5" as="p" color="inherit"  
+
+       >
             {t("home.hero")}
           </Typography>
           <Button variant="store" color="primary" sx={{ mt: "1rem" }}>
             {t("button.shopNow")}
           </Button>
         </Box>
+     
       </Stack>
+     
+      
     </Box>
+   
   );
 }
 export default Hero;

@@ -16,10 +16,17 @@ import InputLabel from "@mui/material/InputLabel";
 import dayjs from "dayjs";
 import {  DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useStore } from "../../store/useStore";
+import { useState } from "react";
 
 function Signup() {
+  const [error, setError] = useState("")
+  const [submitting, setSubmitting] = useState(false)
   const { t } = useTranslation("common");
 
+  const addUser = useStore(state => state.addUser)
+  const theme = useStore(state => state.user.theme)
+  const loggedInUser = useStore((state) => state.user?.firstName);
   const schema = yup.object().shape({
     firstName: yup
 
@@ -54,7 +61,7 @@ function Signup() {
       .required(t("formErrors.fieldRequired"))
       .trim(),
 
-    password: yup.string().required(t("formErrors.fieldRequired")),
+    password: yup.string().required(t("formErrors.fieldRequired")).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,t("formErrors.pwdRegex")),
     rePassword: yup
       .string()
       .required(t("formErrors.fieldRequired"))
@@ -82,6 +89,8 @@ function Signup() {
       .min(dayjs.utc("1900-01-01"), t("formErrors.dateBefore"))
       .max(dayjs.utc(), t("formErrors.dateAfter"))
       .required(t("formErrors.fieldRequired")),
+      theme:yup
+      .string()
   });
 
   const {
@@ -102,6 +111,7 @@ function Signup() {
       gender: "",
       address: "",
       birthDate: dayjs.utc("2000-01-1"),
+      theme
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -109,13 +119,29 @@ function Signup() {
     reValidateMode: "onChange",
   });
 
-  const onSubmit = (data) => console.log(data.birthDate);
+  const onSubmit = async (data) => {
+    console.log(data)
+     setSubmitting(true)
+      setError("")
+    try{
+      const add = await addUser(data)
+      if (add){
+        setSubmitting(false)
+        reset()
+      }
+    } catch(err) {
+      setError(err.message)
+      setSubmitting(false)
+    }
+   
+  }
 
   const genders = [
     { value: "Male", name: t("form.male") },
     { value: "Female", name: t("form.female") },
   ];
   return (
+
     <Box
       mx="auto"
       mt="130px"
@@ -124,6 +150,7 @@ function Signup() {
       as="section"
       sx={{ width: { xs: "90%", sm: "600px" } }}
     >
+      { !loggedInUser ? <>
       <Typography variant="h1" mb={4} textAlign="center">
         {t("button.signup")}
       </Typography>
@@ -288,11 +315,13 @@ function Signup() {
           variant="contained"
           color="primary"
           fullWidth
-          sx={{ display: "block", mt: 4, mx: "auto" }}
+          disabled={submitting}
+          sx={{ display: "block", mt: 4, mx: "auto",color:"white" }}
         >
           {t("button.submit")}
         </Button>
       </Form>
+      {error && <Typography variant="body1" as="p" color="red">{error}</Typography>}
       <Box>
         <Typography mt={4} mr={1} display="inline-block">
           {t("form.alreadyMember")}
@@ -301,6 +330,8 @@ function Signup() {
           {t("button.login")}
         </Link>
       </Box>
+      </>:<Typography variant="h2" textAlign="center" color="text.secondary">You are Already Logged In</Typography>
+}
     </Box>
   );
 }
