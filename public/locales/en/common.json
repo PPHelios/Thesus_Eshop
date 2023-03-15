@@ -56,7 +56,7 @@
 
   "footer": {
     "ourShop": "Our Shop",
-    "help": "Help",
+    "help": "Get Help",
     "sizeGuides": "Size Guides",
     "shippingInfo": "Shipping Information",
     "refundPolicy": "Refund Policy",
@@ -64,7 +64,8 @@
     "aboutUs": "About Us",
     "terms": "Terms Of Service",
     "contact": "Contact Us",
-    "follow": "Follow Our Latest News"
+    "follow": "Follow Our Latest News",
+    "values": "Values"
   },
   "form": {
     "firstName": "First Name",
