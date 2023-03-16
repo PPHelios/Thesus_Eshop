@@ -31,18 +31,24 @@ import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import { Img } from "../muiStyledComponents/muiStyledComponents";
 import { useStore } from "../../store/useStore";
+import Cart from "../../features/Cart/Cart";
 
 function Navbar() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [listDrawerOpen, setListDrawerOpen] = useState(false);
   const [profilePopoverOpen, setProfilePopoverOpen] = useState(null);
   const loggedInUser = useStore((state) => state.user?.firstName);
   const logout = useStore((state) => state.logout);
   const theme = useStore((state) => state.user.theme);
+  const totalCartItemsNumber = useStore((state) => state.cartTotalItems());
   const { t } = useTranslation("common");
 
   const handleMenuDrawerToggle = () => {
     setMobileDrawerOpen((prevState) => !prevState);
+  };
+  const handleCartDrawerToggle = () => {
+    setCartDrawerOpen((prevState) => !prevState);
   };
   const handleListDrawerToggle = () => {
     setListDrawerOpen((prevState) => !prevState);
@@ -163,7 +169,7 @@ function Navbar() {
           sx={{
             height: 60,
             backgroundColor: "secondary.light",
-            color:"text.primary",
+            color: "text.primary",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -182,7 +188,11 @@ function Navbar() {
           {/**************** Logo ****************/}
           <Link href="/" component={Link}>
             <Img
-              src={theme==="light"?require("../../assets/images/Thesus_logo.webp"):require("../../assets/images/ThesusWhite.webp")}
+              src={
+                theme === "light"
+                  ? require("../../assets/images/Thesus_logo.webp")
+                  : require("../../assets/images/ThesusWhite.webp")
+              }
               alt="company logo"
               sx={{
                 width: "90px",
@@ -199,7 +209,7 @@ function Navbar() {
                   <Link
                     component={Link}
                     sx={{
-                      color:"text.primary",
+                      color: "text.primary",
                       width: "max-content",
                       textDecoration: "none",
                       padding: "calc(0.2rem + 0.7vw)",
@@ -215,7 +225,7 @@ function Navbar() {
           <Box
             sx={{
               display: "flex",
-              color:"text.primary",
+              color: "text.primary",
               flexGrow: 0,
               flexDirection: "row",
               justifyContent: "center",
@@ -231,8 +241,14 @@ function Navbar() {
               color="inherit"
               sx={{ p: 0 }}
               aria-label="shopping cart"
+              onClick={handleCartDrawerToggle}
             >
-              <Badge badgeContent={4} color="primary" invisible={false && true} sx={{"& .MuiBadge-colorPrimary":{color:"white"}}}>
+              <Badge
+                badgeContent={totalCartItemsNumber}
+                color="primary"
+                invisible={false && true}
+                sx={{ "& .MuiBadge-colorPrimary": { color: "white" } }}
+              >
                 <ShoppingBagOutlinedIcon />
               </Badge>
             </IconButton>
@@ -350,14 +366,14 @@ function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
+      {/***** Hamburger Menu Drawer *****/}
       <Box component="nav">
-        {/***** Hamburger Menu Drawer *****/}
         <Drawer
           variant="temporary"
           open={mobileDrawerOpen}
           onClose={handleMenuDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, // Better open performance on cart.
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -392,6 +408,25 @@ function Navbar() {
             </Box>
             {navItems}
           </List>
+        </Drawer>
+      </Box>
+      {/***** Cart Drawer *****/}
+      <Box component="nav">
+        <Drawer
+          variant="temporary"
+          open={cartDrawerOpen}
+          onClose={handleCartDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on cart.
+          }}
+          sx={{
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: "max-content",
+            },
+          }}
+        >
+          <Cart onClick={handleCartDrawerToggle} />
         </Drawer>
       </Box>
     </Box>

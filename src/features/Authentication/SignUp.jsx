@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,18 +15,17 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import dayjs from "dayjs";
-import {  DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useStore } from "../../store/useStore";
-import { useState } from "react";
 
 function Signup() {
-  const [error, setError] = useState("")
-  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const { t } = useTranslation("common");
 
-  const addUser = useStore(state => state.addUser)
-  const theme = useStore(state => state.user.theme)
+  const addUser = useStore((state) => state.addUser);
+  const theme = useStore((state) => state.user.theme);
   const loggedInUser = useStore((state) => state.user?.firstName);
   const schema = yup.object().shape({
     firstName: yup
@@ -61,7 +61,13 @@ function Signup() {
       .required(t("formErrors.fieldRequired"))
       .trim(),
 
-    password: yup.string().required(t("formErrors.fieldRequired")).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,t("formErrors.pwdRegex")),
+    password: yup
+      .string()
+      .required(t("formErrors.fieldRequired"))
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        t("formErrors.pwdRegex")
+      ),
     rePassword: yup
       .string()
       .required(t("formErrors.fieldRequired"))
@@ -89,8 +95,7 @@ function Signup() {
       .min(dayjs.utc("1900-01-01"), t("formErrors.dateBefore"))
       .max(dayjs.utc(), t("formErrors.dateAfter"))
       .required(t("formErrors.fieldRequired")),
-      theme:yup
-      .string()
+    theme: yup.string(),
   });
 
   const {
@@ -111,7 +116,7 @@ function Signup() {
       gender: "",
       address: "",
       birthDate: dayjs.utc("2000-01-1"),
-      theme
+      theme,
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -120,28 +125,26 @@ function Signup() {
   });
 
   const onSubmit = async (data) => {
-    console.log(data)
-     setSubmitting(true)
-      setError("")
-    try{
-      const add = await addUser(data)
-      if (add){
-        setSubmitting(false)
-        reset()
+    console.log(data);
+    setSubmitting(true);
+    setError("");
+    try {
+      const add = await addUser(data);
+      if (add) {
+        setSubmitting(false);
+        reset();
       }
-    } catch(err) {
-      setError(err.message)
-      setSubmitting(false)
+    } catch (err) {
+      setError(err.message);
+      setSubmitting(false);
     }
-   
-  }
+  };
 
   const genders = [
     { value: "Male", name: t("form.male") },
     { value: "Female", name: t("form.female") },
   ];
   return (
-
     <Box
       mx="auto"
       mt="130px"
@@ -150,188 +153,197 @@ function Signup() {
       as="section"
       sx={{ width: { xs: "90%", sm: "600px" } }}
     >
-      { !loggedInUser ? <>
-      <Typography variant="h1" mb={4} textAlign="center">
-        {t("button.signup")}
-      </Typography>
-      <Form
-        onSubmit={handleSubmit(onSubmit)}
-        textAlign="center"
-        sx={{
-          mt: 2,
-          "& .MuiTextField-root": { mx: 2, mb: 3, width: "50cw" },
-        }}
-      >
-        <Controller
-          name="firstName"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              id="firstName"
-              label={t("form.firstName")}
-              variant="standard"
-              helperText={errors.firstName && errors.firstName.message}
-            />
-          )}
-        />
-        <Controller
-          name="lastName"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              id="lastName"
-              label={t("form.lastName")}
-              variant="standard"
-              helperText={errors.lastName && errors.lastName.message}
-            />
-          )}
-        />
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              fullWidth
-              id="email"
-              label={t("form.email")}
-              variant="standard"
-              helperText={errors.email && errors.email.message}
-            />
-          )}
-        />
-
-        <Controller
-          name="password"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              {...field}
-              id="password"
-              type="password"
-              label={t("form.password")}
-              variant="standard"
-              placeholder={t("formErrors.pwdRegex")}
-              helperText={errors.password && errors.password.message}
-            />
-          )}
-        />
-        <Controller
-          name="rePassword"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              {...field}
-              id="rePassword"
-              type="password"
-              label={t("form.rePassword")}
-              variant="standard"
-              helperText={errors.rePassword && errors.rePassword.message}
-            />
-          )}
-        />
-        <Controller
-          name="phoneNumber"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              type="number"
-              id="phoneNumber"
-              label={t("form.phoneNumber")}
-              variant="standard"
-              helperText={errors.phoneNumber && errors.phoneNumber.message}
-            />
-          )}
-        />
-        <FormControl sx={{ w: "50%", minWidth: "182px", ml: 2 }}>
-          <InputLabel id="gender-label">{t("form.gender")}</InputLabel>
-          <Controller
-            name="gender"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                type="select"
-                fullWidth
-                id="gender"
-                labelId="gender-label"
-                variant="standard"
-              >
-                {genders.map((gender) => (
-                  <MenuItem key={gender.value} value={gender.value}>
-                    {gender.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            )}
-          />
-          <FormHelperText>
-            {errors.gender && errors.gender.message}
-          </FormHelperText>
-        </FormControl>
-
-        <Controller
-          name="address"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              {...field}
-              id="address"
-              label={t("form.address")}
-              variant="standard"
-              helperText={errors.address && errors.address.message}
-            />
-          )}
-        />
-        <FormControl>
-          <DemoItem label={t("form.birthDate")}>
+      {!loggedInUser ? (
+        <>
+          <Typography variant="h1" mb={4} textAlign="center">
+            {t("button.signup")}
+          </Typography>
+          <Form
+            onSubmit={handleSubmit(onSubmit)}
+            textAlign="center"
+            sx={{
+              mt: 2,
+              "& .MuiTextField-root": { mx: 2, mb: 3, width: "50cw" },
+            }}
+          >
             <Controller
-              name="birthDate"
+              name="firstName"
               control={control}
               render={({ field }) => (
-                <DatePicker
+                <TextField
                   {...field}
-                  id="birthDate"
-                  labelId="birthDate-picker"
-                  aria-labelledby="birthDate-picker"
-                  format="DD/MM/YYYY"
+                  id="firstName"
+                  label={t("form.firstName")}
+                  variant="standard"
+                  helperText={errors.firstName && errors.firstName.message}
                 />
               )}
             />
-            <FormHelperText>
-              {errors.birthDate && errors.birthDate.message}
-            </FormHelperText>
-          </DemoItem>
-        </FormControl>
+            <Controller
+              name="lastName"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="lastName"
+                  label={t("form.lastName")}
+                  variant="standard"
+                  helperText={errors.lastName && errors.lastName.message}
+                />
+              )}
+            />
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  id="email"
+                  label={t("form.email")}
+                  variant="standard"
+                  helperText={errors.email && errors.email.message}
+                />
+              )}
+            />
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          disabled={submitting}
-          sx={{ display: "block", mt: 4, mx: "auto",color:"white" }}
-        >
-          {t("button.submit")}
-        </Button>
-      </Form>
-      {error && <Typography variant="body1" as="p" color="red">{error}</Typography>}
-      <Box>
-        <Typography mt={4} mr={1} display="inline-block">
-          {t("form.alreadyMember")}
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  {...field}
+                  id="password"
+                  type="password"
+                  label={t("form.password")}
+                  variant="standard"
+                  placeholder={t("formErrors.pwdRegex")}
+                  helperText={errors.password && errors.password.message}
+                />
+              )}
+            />
+            <Controller
+              name="rePassword"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  {...field}
+                  id="rePassword"
+                  type="password"
+                  label={t("form.rePassword")}
+                  variant="standard"
+                  helperText={errors.rePassword && errors.rePassword.message}
+                />
+              )}
+            />
+            <Controller
+              name="phoneNumber"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  type="number"
+                  id="phoneNumber"
+                  label={t("form.phoneNumber")}
+                  variant="standard"
+                  helperText={errors.phoneNumber && errors.phoneNumber.message}
+                />
+              )}
+            />
+            <FormControl sx={{ w: "50%", minWidth: "182px", ml: 2 }}>
+              <InputLabel id="gender-label">{t("form.gender")}</InputLabel>
+              <Controller
+                name="gender"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    type="select"
+                    fullWidth
+                    id="gender"
+                    labelId="gender-label"
+                    variant="standard"
+                  >
+                    {genders.map((gender) => (
+                      <MenuItem key={gender.value} value={gender.value}>
+                        {gender.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+              <FormHelperText>
+                {errors.gender && errors.gender.message}
+              </FormHelperText>
+            </FormControl>
+
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  {...field}
+                  id="address"
+                  label={t("form.address")}
+                  variant="standard"
+                  helperText={errors.address && errors.address.message}
+                />
+              )}
+            />
+            <FormControl>
+              <DemoItem label={t("form.birthDate")}>
+                <Controller
+                  name="birthDate"
+                  control={control}
+                  render={({ field }) => (
+                    <DatePicker
+                      {...field}
+                      id="birthDate"
+                      labelId="birthDate-picker"
+                      aria-labelledby="birthDate-picker"
+                      format="DD/MM/YYYY"
+                    />
+                  )}
+                />
+                <FormHelperText>
+                  {errors.birthDate && errors.birthDate.message}
+                </FormHelperText>
+              </DemoItem>
+            </FormControl>
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={submitting}
+              sx={{ display: "block", mt: 4, mx: "auto", color: "white" }}
+            >
+              {t("button.submit")}
+            </Button>
+          </Form>
+          {error && (
+            <Typography variant="body1" as="p" color="red">
+              {error}
+            </Typography>
+          )}
+          <Box>
+            <Typography mt={4} mr={1} display="inline-block">
+              {t("form.alreadyMember")}
+            </Typography>
+            <Link href="/login" color="secondary.main">
+              {t("button.login")}
+            </Link>
+          </Box>
+        </>
+      ) : (
+        <Typography variant="h2" textAlign="center" color="text.secondary">
+          You are Already Logged In
         </Typography>
-        <Link href="/login" color="secondary.main">
-          {t("button.login")}
-        </Link>
-      </Box>
-      </>:<Typography variant="h2" textAlign="center" color="text.secondary">You are Already Logged In</Typography>
-}
+      )}
     </Box>
   );
 }

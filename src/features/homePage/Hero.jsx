@@ -9,21 +9,21 @@ import spring1232 from "../../assets/images/2023_spring_pink_tzpwlq_c_scale,w_12
 import spring1380 from "../../assets/images/2023_spring_pink_tzpwlq_c_scale,w_1380.webp";
 import Button from "@mui/material/Button";
 import { Img } from "../../components/muiStyledComponents/muiStyledComponents";
-
+import { XyzTransition } from "@animxyz/react";
+import "@animxyz/core";
 
 function Hero() {
   const { t } = useTranslation("common");
   return (
-
     <Box as="main" sx={{ position: "relative" }}>
       <Img
         sizes="(max-width: 1380px) 100vw,
         1380px"
-          src={spring1380}
+        src={spring1380}
         srcset={`${spring350} 350w,
           ${spring941} 941w,
 ${spring1232} 1232w,
-${spring1380} 1380w`}      
+${spring1380} 1380w`}
         alt="new shoes picture"
         sx={{
           width: "100%",
@@ -34,10 +34,6 @@ ${spring1380} 1380w`}
           objectPosition: "0 35%",
         }}
       />
-
-
- 
-
 
       <Stack
         sx={{
@@ -50,43 +46,45 @@ ${spring1380} 1380w`}
           color: "primary.main",
           justifyContent: "flex-start",
           gap: "3vw",
-
         }}
-    
       >
+        <XyzTransition appear duration="auto">
+          <div>
+            <Typography
+              variant="h2"
+              as="h2"
+              color="inherit"
+              sx={{ fontWeight: 500 }}
+              className="xyz-nested"
+              xyz="fade left stagger delay-1 duration-30"
+            >
+              {t("home.newCollection")}
+            </Typography>
 
-
-
-
-
-        <Typography
-          variant="h2"
-          as="h2"
-          color="inherit"
-          sx={{ fontWeight: 500,  }}
-      
-        >
-          {t("home.newCollection")}
-        </Typography>
-    
-
-   
-        <Box>
-          <Typography variant="h5" as="p" color="inherit"  
-
-       >
-            {t("home.hero")}
-          </Typography>
-          <Button variant="store" color="primary" sx={{ mt: "1rem" }}>
-            {t("button.shopNow")}
-          </Button>
-        </Box>
-     
+            <Box>
+              <Typography
+                variant="h5"
+                as="p"
+                color="inherit"
+                className="xyz-nested"
+                xyz="fade left stagger delay-5 duration-30"
+              >
+                {t("home.hero")}
+              </Typography>
+              <Button
+                variant="store"
+                color="primary"
+                sx={{ mt: "1rem" }}
+                className="xyz-nested"
+                xyz="fade big delay-20"
+              >
+                {t("button.shopNow")}
+              </Button>
+            </Box>
+          </div>
+        </XyzTransition>
       </Stack>
-     
-      
     </Box>
-   
   );
 }
 export default Hero;
