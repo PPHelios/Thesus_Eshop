@@ -111,7 +111,7 @@ export const userSlice = (set, get) => ({
             state.user = user;
           })
         );
-        return true
+        return true;
       }
     } catch (err) {
       throw new Error(err.message);
@@ -123,7 +123,7 @@ export const userSlice = (set, get) => ({
     console.log(res);
     set(
       produce((state) => {
-        state.user = { cart: [],theme:get().user.theme };
+        state.user = { cart: [], theme: get().user.theme };
       })
     );
     set(
@@ -253,12 +253,13 @@ export const userSlice = (set, get) => ({
   },
   cartTotalItemsPrice: () => {
     const cartItems = get().user.cart;
-    return cartItems.reduce(
-      (total, next) => total + next.quantity * next.discountedPrice,
-      0
-    );
+    return cartItems.reduce((total, next) => {
+      const discountedPrice =
+        next.price - (next.price / 100) * next.discountPercentage;
+      return total + next.quantity * discountedPrice;
+    }, 0);
   },
-  cartBeforeDiscountTotalItemsPrice: () => {
+  cartTotalItemsPriceBeforeDiscount: () => {
     const cartItems = get().user.cart;
     return cartItems.reduce(
       (total, next) => total + next.quantity * next.price,

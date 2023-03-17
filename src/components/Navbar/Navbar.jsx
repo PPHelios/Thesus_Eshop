@@ -42,8 +42,8 @@ function Navbar() {
   const logout = useStore((state) => state.logout);
   const theme = useStore((state) => state.user.theme);
   const totalCartItemsNumber = useStore((state) => state.cartTotalItems());
-  const { t } = useTranslation("common");
-
+  const { t, i18n } = useTranslation("common");
+  const docDir = i18n.dir();
   const handleMenuDrawerToggle = () => {
     setMobileDrawerOpen((prevState) => !prevState);
   };
@@ -373,7 +373,7 @@ function Navbar() {
           open={mobileDrawerOpen}
           onClose={handleMenuDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on cart.
+            keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -414,10 +414,12 @@ function Navbar() {
       <Box component="nav">
         <Drawer
           variant="temporary"
+          //  anchor={docDir === "rtl" ? "left" : "left"}
+          SlideProps={{ direction: docDir === "rtl" ? "left" : "right" }}
           open={cartDrawerOpen}
           onClose={handleCartDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on cart.
+            keepMounted: true,
           }}
           sx={{
             "& .MuiDrawer-paper": {

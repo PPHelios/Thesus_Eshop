@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+import { useStore } from "../../store/useStore";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -5,11 +7,12 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import { useTranslation } from "react-i18next";
 
 const ProductCard = ({ item }) => {
   const { t, i18n } = useTranslation("common");
   const lang = i18n.dir();
+  const addItemToCart = useStore((state) => state.addItemToCart);
+
   let discountedPrice;
   if (item?.discountPercentage > 0) {
     discountedPrice = Math.floor(
@@ -123,6 +126,7 @@ ${require(`../../assets/images/${item.img},w_1280.webp`)} 1280w`}
           mt="5px"
           sx={{ fontSize: { sm: "1rem," } }}
           disabled={item.soldout || item.stockQuantity === 0}
+          onClick={() => addItemToCart(item)}
         >
           {t("button.addToCart")}
         </Button>

@@ -29,7 +29,9 @@
     "signup": "Sign Up",
     "profile": "Profile",
     "profileSettings": "Profile Settings",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "shopItems": "Shop Some Items",
+    "proceedToCheckOut": "Proceed To Check Out"
   },
   "product": {
     "name": "Name",
@@ -38,7 +40,7 @@
     "productPrice": "Product Price",
     "category": "Category",
     "quantity": "Quantity",
-    "soldOut":"Out Of Stock",
+    "soldOut": "Out Of Stock",
     "Price": "Price",
     "discountedPrice": "Discounted Price",
     "discountPercentage": "Discount Percentage",
@@ -51,7 +53,11 @@
     "storeClogsHeroSub": "Made with 99% natural and recycled materials.",
     "4in1h2": "The 4-in-1 Hiking Boot",
     "4in1p": "Comfy, cosy and seriously cute. This 4-in-1 hiking boot is a go-to all year outdoor staple made for the trails, parks and city streets. They are water-resistant and easy to clean - from summer through winter they’ve got you covered. Each pair is vegan, cruelty free and made with recycled ocean plastic.",
-    "clogsH1":"Easy, Comfy Slip On"
+    "clogsH1": "Easy, Comfy Slip On",
+    "yourCart": "Your Cart",
+    "shoppingCartEmpty": " Your Shopping Cart Is Empty...",
+    "totalPrice": "Total Price",
+    "totalPriceBeforeDiscount": "Total Price Before Discount"
   },
 
   "footer": {

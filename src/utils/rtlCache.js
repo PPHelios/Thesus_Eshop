@@ -10,4 +10,5 @@ export const cacheRtl = createCache({
 });
 export const cacheLtr = createCache({
   key: "muiltr",
+  stylisPlugins: [prefixer],
 });

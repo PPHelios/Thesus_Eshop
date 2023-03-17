@@ -25,6 +25,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 import { useStore } from "./store/useStore";
+import Checkout from "./features/Cart/Checkout";
 
 const MainLayout = lazy(() => import("./layouts/MainLayout"));
 const HomePage = lazy(() => import("./features/homePage/HomePage"));
@@ -43,10 +44,11 @@ function App() {
     getProducts();
   }, []);
   const { i18n } = useTranslation();
-  const docDir = i18n.dir();
   useEffect(() => {
     document.dir = i18n.dir();
   }, [i18n, i18n.language]);
+
+  const docDir = i18n.dir();
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -55,6 +57,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route
             path="/weekendBoots"
             element={

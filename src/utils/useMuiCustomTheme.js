@@ -28,7 +28,6 @@ LinkBehavior.propTypes = {
   ]).isRequired,
 };
 function useMuiCustomTheme() {
-  console.log("theme");
   const colorMode = useStore((state) => state.user.theme);
   const { i18n } = useTranslation();
   const docDir = i18n.dir();
