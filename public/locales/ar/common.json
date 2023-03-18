@@ -66,8 +66,9 @@
     "clogsH1": "حذاء خفيف و مريح",
     "yourCart": "عربة التسوق",
     "shoppingCartEmpty": " عربة التسوق فارغه",
-    "totalPrice": "السعر الأٍجمالي",
-    "totalPriceBeforeDiscount": "السعر الاٍجمالي قبل الخصم"
+    "totalPrice": "السعر الأٍجمالي {{val}} ج.م.",
+    "totalPriceBeforeDiscount": "السعر الاٍجمالي قبل الخصم {{val}} ج.م.",
+    "shopAll": "تسوق من الكل"
   },
   "footer": {
     "ourShop": "منتجاتنا",

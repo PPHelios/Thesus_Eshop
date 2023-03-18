@@ -10,10 +10,15 @@ import "@animxyz/core";
 
 function Store({ pageProduct, pageTitle, pageParagraph }) {
   const { t } = useTranslation("common");
-
-  const filteredProducts = useStore((state) => state.products).filter(
-    (product) => product.category === pageProduct
-  );
+  const products = useStore((state) => state.products);
+  let filteredProducts;
+  if (pageProduct) {
+    filteredProducts = products.filter(
+      (product) => product.category === pageProduct
+    );
+  } else {
+    filteredProducts = products;
+  }
 
   return (
     <Box mt="120px" backgroundColor="gray.light">
@@ -62,6 +67,49 @@ ${require(`../../assets/images/weekendBootsHero,w_1280.webp`)} 1280w`}
       )}
 
       {pageProduct === "Terrus Clog" && (
+        <Box as="main" position="relative">
+          <Img
+            sizes="(max-width: 1280px) 50vw, 1280px"
+            srcSet={`${require(`../../assets/images/terrusClogsHero,w_300.webp`)} 300w,
+${require(`../../assets/images/terrusClogsHero,w_657.webp`)} 657w,
+${require(`../../assets/images/terrusClogsHero,w_941.webp`)} 941w,
+${require(`../../assets/images/terrusClogsHero,w_1221.webp`)} 1221w,
+${require(`../../assets/images/terrusClogsHero,w_1280.webp`)} 1280w`}
+            src={require(`../../assets/images/terrusClogsHero,w_941.webp`)}
+            alt="a girl with beige terrus clog"
+            width="100%"
+          />
+          <Stack
+            position="absolute"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            left={0}
+            width="100%"
+            height="100%"
+            color="white"
+            textAlign="center"
+            sx={{ top: { xs: "2vw", sm: "-12vw" } }}
+          >
+            <Typography
+              as="h2"
+              sx={{
+                fontSize: { xs: "1.6rem", sm: "calc(2rem + 4vw)" },
+                fontWeight: "700",
+              }}
+            >
+              {t("store.storeClogsHero")}
+            </Typography>
+            <Typography
+              as="p"
+              sx={{ fontSize: { xs: "0.8rem", sm: "calc(0.2rem + 1vw)" } }}
+            >
+              {t("store.storeClogsHeroSub")}
+            </Typography>
+          </Stack>
+        </Box>
+      )}
+      {!pageProduct && (
         <Box as="main" position="relative">
           <Img
             sizes="(max-width: 1280px) 50vw, 1280px"

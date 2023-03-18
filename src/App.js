@@ -74,6 +74,7 @@ function App() {
               <Store pageProduct={"Terrus Clog"} pageTitle={"clogsH1"} />
             }
           />
+          <Route path="/shopall" element={<Store pageTitle={"shopAll"} />} />
         </Route>
       </>
     )

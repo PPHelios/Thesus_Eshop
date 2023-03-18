@@ -56,8 +56,9 @@
     "clogsH1": "Easy, Comfy Slip On",
     "yourCart": "Your Cart",
     "shoppingCartEmpty": " Your Shopping Cart Is Empty...",
-    "totalPrice": "Total Price",
-    "totalPriceBeforeDiscount": "Total Price Before Discount"
+    "totalPrice": "Total Price {{val}} LE",
+    "totalPriceBeforeDiscount": "Total Price Before Discount {{val}} LE",
+    "shopAll": "Shop All"
   },
 
   "footer": {

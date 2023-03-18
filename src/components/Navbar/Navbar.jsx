@@ -20,12 +20,15 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Popover from "@mui/material/Popover";
 import Badge from "@mui/material/Badge";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import ClickAwayListener from "@mui/base/ClickAwayListener";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
@@ -34,13 +37,18 @@ import { useStore } from "../../store/useStore";
 import Cart from "../../features/Cart/Cart";
 
 function Navbar() {
+  const products = useStore((state) => state.products);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [listDrawerOpen, setListDrawerOpen] = useState(false);
   const [profilePopoverOpen, setProfilePopoverOpen] = useState(null);
+  const [value, setValue] = useState("");
+
+  const [searchOpen, setSearchOpen] = useState(false);
   const loggedInUser = useStore((state) => state.user?.firstName);
   const logout = useStore((state) => state.logout);
   const theme = useStore((state) => state.user.theme);
+
   const totalCartItemsNumber = useStore((state) => state.cartTotalItems());
   const { t, i18n } = useTranslation("common");
   const docDir = i18n.dir();
@@ -60,6 +68,9 @@ function Navbar() {
   const handleProfilePopoverClose = () => {
     setProfilePopoverOpen(null);
   };
+  const handleSearchToggle = () => {
+    setSearchOpen((prevState) => !prevState);
+  };
   const open = Boolean(profilePopoverOpen);
   const id = open ? "profile settings menu" : undefined;
   const drawerWidth = 240;
@@ -75,7 +86,7 @@ function Navbar() {
           icon: "",
           show: loggedInUser,
         },
-        { link: "/user/favorites", label: "favorites", icon: "", show: true },
+
         { link: "/login", label: "login", icon: "", show: !loggedInUser },
         {
           link: "#",
@@ -87,7 +98,6 @@ function Navbar() {
     },
     { link: "/weekendBoots", label: "weekendBoots" },
     { link: "/terrusClogs", label: "terrusClogs" },
-    { link: "/accessories", label: "accessories" },
     { link: "/shopAll", label: "shopAll" },
     { link: "/values", label: "values" },
   ];
@@ -229,12 +239,55 @@ function Navbar() {
               flexGrow: 0,
               flexDirection: "row",
               justifyContent: "center",
-              alignItems: "stretch",
+              alignItems: "center",
               alignSelf: "stretch",
               gap: 1,
+              position: "relative",
             }}
           >
-            <IconButton color="inherit" sx={{ p: 0 }} aria-label="search">
+            {searchOpen && (
+              <ClickAwayListener onClickAway={() => setSearchOpen(false)}>
+                <Autocomplete
+                  freeSolo
+                  size="small"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                  id="search"
+                  options={products.map((item) => ({
+                    label: item.name,
+                    img: item.img,
+                  }))}
+                  renderOption={(props, option) => (
+                    <Link
+                      href="/shopall"
+                      sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                      {...props}
+                      onClick={handleSearchToggle}
+                    >
+                      <img
+                        loading="lazy"
+                        width="60"
+                        src={require(`../../assets/images/${option.img},w_300.webp`)}
+                        alt={option.alt}
+                      />
+                      {option.label}
+                    </Link>
+                  )}
+                  sx={{ width: { xs: 150, sm: 250 } }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Search" />
+                  )}
+                />
+              </ClickAwayListener>
+            )}
+            <IconButton
+              color="inherit"
+              sx={{ p: 0 }}
+              aria-label="search"
+              onClick={handleSearchToggle}
+            >
               <SearchOutlinedIcon />
             </IconButton>
             <IconButton
@@ -311,20 +364,6 @@ function Navbar() {
                         <ManageAccountsOutlinedIcon />
                       </ListItemIcon>
                       <ListItemText primary={t(`button.profileSettings`)} />
-                    </ListItem>
-                  )}
-                  {loggedInUser && (
-                    <ListItem
-                      color="inherit"
-                      component={Link}
-                      href="/"
-                      disablePadding
-                      onClick={() => setProfilePopoverOpen(null)}
-                    >
-                      <ListItemIcon>
-                        <FavoriteBorderOutlinedIcon />
-                      </ListItemIcon>
-                      <ListItemText primary={t(`button.favorites`)} />
                     </ListItem>
                   )}
 

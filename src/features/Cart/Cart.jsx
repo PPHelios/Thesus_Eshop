@@ -23,7 +23,7 @@ function Cart({ onClick }) {
   return (
     <Stack
       minWidth={200}
-      maxWidth={400}
+      maxWidth="90vw"
       maxHeight="max-content"
       minHeight="100%"
       backgroundColor="secondary.light"
@@ -57,11 +57,15 @@ function Cart({ onClick }) {
           color="red"
           sx={{ textDecoration: "line-through" }}
         >
-          {t("store.totalPriceBeforeDiscount")}:{" "}
-          {cartTotalItemsPriceBeforeDiscount}
+          {cartTotalItemsPriceBeforeDiscount > 0 &&
+            cartTotalItemsPriceBeforeDiscount !== cartTotalItemsPrice &&
+            t("store.totalPriceBeforeDiscount", {
+              val: cartTotalItemsPriceBeforeDiscount,
+            })}
         </Typography>
         <Typography variant="h6">
-          {t("store.totalPrice")}: {cartTotalItemsPrice}
+          {cartTotalItemsPrice > 0 &&
+            t("store.totalPrice", { val: cartTotalItemsPrice })}
         </Typography>
         <Button
           width="100px"
@@ -70,8 +74,14 @@ function Cart({ onClick }) {
           fullWidth
           onClick={
             !totalItemsNumber
-              ? () => navigate("/shop")
-              : () => navigate("/checkout")
+              ? () => {
+                  navigate("/shopall");
+                  onClick();
+                }
+              : () => {
+                  navigate("/checkout");
+                  onClick();
+                }
           }
         >
           {!totalItemsNumber
