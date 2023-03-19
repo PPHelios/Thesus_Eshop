@@ -66,6 +66,7 @@ function Footer() {
                 href={item.link}
                 color="#fff"
                 disablePadding
+                sx={{ py: { xs: "0.5rem", sm: "0.1rem" } }}
               >
                 <ListItemText primary={t(`nav_bar.${item.label}`)} />
               </ListItem>
@@ -84,6 +85,7 @@ function Footer() {
                 href={item.link}
                 color="#fff"
                 disablePadding
+                sx={{ py: { xs: "0.5rem", sm: "0.1rem" } }}
               >
                 <ListItemText primary={t(`footer.${item.label}`)} />
               </ListItem>
@@ -103,6 +105,7 @@ function Footer() {
                 href={item.link}
                 color="#fff"
                 disablePadding
+                sx={{ py: { xs: "0.5rem", sm: "0.1rem" } }}
               >
                 <ListItemText primary={t(`footer.${item.label}`)} />
               </ListItem>

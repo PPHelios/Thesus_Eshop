@@ -39,7 +39,7 @@ function useMuiCustomTheme() {
         breakpoints: {
           values: {
             xs: 0,
-            sm: 693,
+            sm: 600,
             md: 900,
             lg: 1200,
             xl: 1536,
@@ -82,19 +82,19 @@ function useMuiCustomTheme() {
                   selected: "#fff",
                 },
                 primary: {
-                  main: "rgba(255, 255, 255, 0.08)",
+                  main: "#000",
                   light: "rgba(255, 255, 255, 0.08)",
-                  dark: "gray",
+                  dark: "#000",
                   contrastThreshold: 4.5,
                 },
                 secondary: {
                   main: "#95125B",
-                  light: "gray",
+                  light: "#000",
                   dark: "rgba(255, 255, 255, 0.16)",
                   contrastThreshold: 4.5,
                 },
                 gray: {
-                  light: "#000",
+                  light: "rgba(255, 255, 255, 0.08)",
                 },
                 text: {
                   primary: "#fff",

@@ -34,7 +34,9 @@ function Checkout() {
       </Typography>
 
       <Stack
-        sx={{ flexDirection: { xs: "column", sm: "row" } }}
+        sx={{
+          flexDirection: { xs: "column", sm: "row" },
+        }}
         spacing={3}
         justifyContent="space-evenly"
       >

@@ -44,7 +44,7 @@ function Navbar() {
   const [profilePopoverOpen, setProfilePopoverOpen] = useState(null);
   const [value, setValue] = useState("");
 
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchDrawerOpen, setSearchDrawerOpen] = useState(false);
   const loggedInUser = useStore((state) => state.user?.firstName);
   const logout = useStore((state) => state.logout);
   const theme = useStore((state) => state.user.theme);
@@ -68,8 +68,8 @@ function Navbar() {
   const handleProfilePopoverClose = () => {
     setProfilePopoverOpen(null);
   };
-  const handleSearchToggle = () => {
-    setSearchOpen((prevState) => !prevState);
+  const handleSearchDrawerToggle = () => {
+    setSearchDrawerOpen((prevState) => !prevState);
   };
   const open = Boolean(profilePopoverOpen);
   const id = open ? "profile settings menu" : undefined;
@@ -174,6 +174,7 @@ function Navbar() {
             {t("nav_bar.Announcement", { val: 1000 })}
           </Typography>
         </Stack>
+        <Divider />
         {/**************** Navbar ****************/}
         <Toolbar
           sx={{
@@ -245,48 +246,78 @@ function Navbar() {
               position: "relative",
             }}
           >
-            {searchOpen && (
-              <ClickAwayListener onClickAway={() => setSearchOpen(false)}>
-                <Autocomplete
-                  freeSolo
-                  size="small"
-                  value={value}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-                  }}
-                  id="search"
-                  options={products.map((item) => ({
-                    label: item.name,
-                    img: item.img,
-                  }))}
-                  renderOption={(props, option) => (
-                    <Link
-                      href="/shopall"
-                      sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                      {...props}
-                      onClick={handleSearchToggle}
-                    >
-                      <img
-                        loading="lazy"
-                        width="60"
-                        src={require(`../../assets/images/${option.img},w_300.webp`)}
-                        alt={option.alt}
-                      />
-                      {option.label}
-                    </Link>
-                  )}
-                  sx={{ width: { xs: 150, sm: 250 } }}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Search" />
-                  )}
-                />
-              </ClickAwayListener>
-            )}
+            {/***** Search Drawer *****/}
+            <Drawer
+              variant="temporary"
+              open={searchDrawerOpen}
+              onClose={handleSearchDrawerToggle}
+              ModalProps={{
+                keepMounted: false, // Better open performance on mobile.
+              }}
+              anchor="top"
+              sx={{
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  height: 130,
+                  backgroundColor: "secondary.light",
+                },
+              }}
+            >
+              <Autocomplete
+                freeSolo
+                size="small"
+                value={value}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+                id="search"
+                options={products.map((item) => ({
+                  label: item.name,
+                  img: item.img,
+                }))}
+                renderOption={(props, option) => (
+                  <Link
+                    href="/shopall"
+                    sx={{
+                      "& > img": { mr: 2, flexShrink: 0 },
+                      color: "text.primary",
+                    }}
+                    {...props}
+                    onClick={handleSearchDrawerToggle}
+                  >
+                    <img
+                      loading="lazy"
+                      width="60"
+                      src={require(`../../assets/images/${option.img},w_300.webp`)}
+                      alt={option.alt}
+                    />
+                    {option.label}
+                  </Link>
+                )}
+                sx={{
+                  px: 2,
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    fullWidth
+                    {...params}
+                    label="Search"
+                    sx={{
+                      mt: 2,
+                      mx: "auto",
+                      "& label.Mui-focused": {
+                        color: "text.primary",
+                      },
+                    }}
+                  />
+                )}
+              />
+            </Drawer>
+
             <IconButton
               color="inherit"
-              sx={{ p: 0 }}
               aria-label="search"
-              onClick={handleSearchToggle}
+              onClick={handleSearchDrawerToggle}
             >
               <SearchOutlinedIcon />
             </IconButton>
@@ -434,17 +465,23 @@ function Navbar() {
             component="nav"
             aria-labelledby="nested-list"
           >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                pb: 3,
-              }}
-            >
-              <LanguageSwitcher closeHamburgerDrawer={handleMenuDrawerToggle} />
-              <ThemeToggler />
+            <Box textAlign="center">
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  pb: 1,
+                }}
+              >
+                <LanguageSwitcher
+                  closeHamburgerDrawer={handleMenuDrawerToggle}
+                />
+                <ThemeToggler />
+              </Box>
+              <Divider />
             </Box>
+            <Divider />
             {navItems}
           </List>
         </Drawer>

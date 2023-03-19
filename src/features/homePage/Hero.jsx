@@ -32,6 +32,7 @@ ${spring1380} 1380w`}
           mx: "auto",
           objectFit: "cover",
           objectPosition: "0 35%",
+          minHeight: { xs: "210px", md: "470px" },
         }}
       />
 
@@ -39,7 +40,7 @@ ${spring1380} 1380w`}
         sx={{
           width: { xs: "80%", sm: "50%", lg: "40%" },
           height: "100%",
-          mt: "2rem",
+          mt: "1.3rem",
           px: "1rem",
           position: { xs: "static", sm: "absolute" },
           top: "10%",
@@ -48,7 +49,11 @@ ${spring1380} 1380w`}
           gap: "3vw",
         }}
       >
-        <XyzTransition appear duration="auto">
+        <XyzTransition
+          appear
+          duration="auto"
+          xyz="fade left-100% stagger-4 delay-5 duration-30"
+        >
           <div>
             <Typography
               variant="h2"
@@ -56,7 +61,6 @@ ${spring1380} 1380w`}
               color="inherit"
               sx={{ fontWeight: 500 }}
               className="xyz-nested"
-              xyz="fade left stagger delay-1 duration-30"
             >
               {t("home.newCollection")}
             </Typography>
@@ -67,7 +71,6 @@ ${spring1380} 1380w`}
                 as="p"
                 color="inherit"
                 className="xyz-nested"
-                xyz="fade left stagger delay-5 duration-30"
               >
                 {t("home.hero")}
               </Typography>
@@ -76,7 +79,7 @@ ${spring1380} 1380w`}
                 color="primary"
                 sx={{ mt: "1rem" }}
                 className="xyz-nested"
-                xyz="fade big delay-20"
+                xyz="fade big duration-30"
               >
                 {t("button.shopNow")}
               </Button>
