@@ -22,7 +22,6 @@ import Popover from "@mui/material/Popover";
 import Badge from "@mui/material/Badge";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import ClickAwayListener from "@mui/base/ClickAwayListener";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -272,7 +271,7 @@ function Navbar() {
                 }}
                 id="search"
                 options={products.map((item) => ({
-                  label: item.name,
+                  label: docDir === "rtl" ? item.nameAr : item.name,
                   img: item.img,
                 }))}
                 renderOption={(props, option) => (
@@ -301,7 +300,7 @@ function Navbar() {
                   <TextField
                     fullWidth
                     {...params}
-                    label="Search"
+                    label={t("button.search")}
                     sx={{
                       mt: 2,
                       mx: "auto",

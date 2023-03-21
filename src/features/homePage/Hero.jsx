@@ -38,13 +38,14 @@ ${spring1380} 1380w`}
 
       <Stack
         sx={{
-          width: { xs: "80%", sm: "50%", lg: "40%" },
+          width: "100%",
           height: "100%",
-          mt: "1.3rem",
-          px: "1rem",
+          pt: { sm: "5%", md: "11%" },
+          px: "2rem",
           position: { xs: "static", sm: "absolute" },
-          top: "10%",
+          top: 0,
           color: "primary.main",
+          backgroundColor: "rgba(0,0,0,0.2)",
           justifyContent: "flex-start",
           gap: "3vw",
         }}
@@ -52,9 +53,9 @@ ${spring1380} 1380w`}
         <XyzTransition
           appear
           duration="auto"
-          xyz="fade left-100% stagger-4 delay-5 duration-30"
+          xyz="fade up stagger-4 delay-2 duration-30"
         >
-          <div>
+          <Box sx={{ width: { xs: "80%", sm: "50%", lg: "40%" } }}>
             <Typography
               variant="h2"
               as="h2"
@@ -79,12 +80,11 @@ ${spring1380} 1380w`}
                 color="primary"
                 sx={{ mt: "1rem" }}
                 className="xyz-nested"
-                xyz="fade big duration-30"
               >
                 {t("button.shopNow")}
               </Button>
             </Box>
-          </div>
+          </Box>
         </XyzTransition>
       </Stack>
     </Box>

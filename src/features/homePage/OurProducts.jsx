@@ -5,10 +5,9 @@ import Stack from "@mui/material/Stack";
 import { Img } from "../../components/muiStyledComponents/muiStyledComponents";
 import { useStore } from "../../store/useStore";
 
-// [{x:[]},{y:[]}]
 export default function OurProducts() {
-  const { t } = useTranslation("common");
-
+  const { t, i18n } = useTranslation("common");
+  const docDir = i18n.dir();
   const filteredProducts = useStore((state) =>
     state.products.filter((item) => item.ourProducts === true)
   );
@@ -32,6 +31,12 @@ export default function OurProducts() {
       >
         {filteredProducts &&
           filteredProducts.map((item) => {
+            let category;
+            if (item.category === "Weekend Boot") {
+              category = "weekendBoots";
+            } else if (item.category === "Terrus Clog") {
+              category = "terrusClogs";
+            }
             return (
               <Stack
                 key={item._id}
@@ -47,7 +52,7 @@ export default function OurProducts() {
                     mb={1}
                     color="text.primary"
                   >
-                    {item.category}
+                    {t(`nav_bar.${category}`)}
                   </Typography>
                   <Typography
                     variant="h6"
@@ -55,7 +60,7 @@ export default function OurProducts() {
                     color="text.primary"
                     width="50%"
                   >
-                    {item.description}
+                    {docDir === "rtl" ? item.descriptionAr : item.description}
                   </Typography>
                 </Box>
 

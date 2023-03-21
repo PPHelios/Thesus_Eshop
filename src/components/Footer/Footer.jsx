@@ -20,17 +20,17 @@ const ourStoreLinks = [
 ];
 
 const helpLinks = [
-  { label: "sizeGuides", link: "/sizeGuides" },
-  { label: "shippingInfo", link: "/shipping" },
-  { label: "refundPolicy", link: "/refundPolicy" },
-  { label: "faq", link: "/faq" },
+  { label: "sizeGuides", link: "/" },
+  { label: "shippingInfo", link: "/" },
+  { label: "refundPolicy", link: "/" },
+  { label: "faq", link: "/" },
 ];
 const aboutUsLinks = [
-  { label: "values", link: "/values" },
+  { label: "values", link: "/" },
 
-  { label: "terms", link: "/terms" },
+  { label: "terms", link: "/" },
 
-  { label: "contact", link: "/contact" },
+  { label: "contact", link: "/" },
 ];
 
 function Footer() {

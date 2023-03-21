@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useMemo, lazy } from "react";
+import { Suspense, useEffect, lazy } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Route,
@@ -32,17 +32,16 @@ const HomePage = lazy(() => import("./features/homePage/HomePage"));
 const Signup = lazy(() => import("./features/authentication/Signup"));
 const Login = lazy(() => import("./features/authentication/Login"));
 const Store = lazy(() => import("./features/store/Store"));
-
-//import MainLayout from "./layouts/MainLayout";
+const Values = lazy(() => import("./features/values/Values"));
 
 dayjs.extend(utc);
 
 function App() {
   const theme = useMuiCustomTheme();
-  const getProducts = useStore((state) => state.getProducts);
-  useEffect(() => {
-    getProducts();
-  }, []);
+  // const getProducts = useStore((state) => state.getProducts);
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
   const { i18n } = useTranslation();
   useEffect(() => {
     document.dir = i18n.dir();
@@ -75,6 +74,7 @@ function App() {
             }
           />
           <Route path="/shopall" element={<Store pageTitle={"shopAll"} />} />
+          <Route path="/values" element={<Values />} />
         </Route>
       </>
     )

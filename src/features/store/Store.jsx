@@ -35,7 +35,10 @@ ${require(`../../assets/images/weekendBootsHero,w_1280.webp`)} 1280w`}
             src={require(`../../assets/images/weekendBootsHero,w_941.webp`)}
             alt="a girl with beige weekend boots"
             width="100%"
-            sx={{ minHeight: { xs: "210px", md: "470px" } }}
+            sx={{
+              minHeight: { xs: "210px", md: "470px" },
+              filter: "brightness(80%)",
+            }}
           />
           <XyzTransition
             appear
@@ -86,7 +89,10 @@ ${require(`../../assets/images/terrusClogsHero,w_1280.webp`)} 1280w`}
             src={require(`../../assets/images/terrusClogsHero,w_941.webp`)}
             alt="a girl with beige terrus clog"
             width="100%"
-            sx={{ minHeight: { xs: "210px", md: "470px" } }}
+            sx={{
+              minHeight: { xs: "210px", md: "470px" },
+              filter: "brightness(80%)",
+            }}
           />
           <XyzTransition
             appear
@@ -99,6 +105,7 @@ ${require(`../../assets/images/terrusClogsHero,w_1280.webp`)} 1280w`}
               justifyContent="center"
               alignItems="center"
               left={0}
+              top={0}
               width="100%"
               height="100%"
               color="white"
@@ -116,7 +123,7 @@ ${require(`../../assets/images/terrusClogsHero,w_1280.webp`)} 1280w`}
               </Typography>
               <Typography
                 as="p"
-                sx={{ fontSize: { xs: "0.8rem", sm: "calc(0.2rem + 1vw)" } }}
+                sx={{ fontSize: { xs: "0.8rem", sm: "calc(0.3rem + 1vw)" } }}
               >
                 {t("store.storeClogsHeroSub")}
               </Typography>

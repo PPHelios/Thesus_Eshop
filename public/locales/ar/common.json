@@ -34,7 +34,8 @@
 
     "favorites": "المفضله",
     "shopItems": "تسوق منتجاتنا",
-    "proceedToCheckOut": "اٍتمام عمليه الشراء"
+    "proceedToCheckOut": "اٍتمام عمليه الشراء",
+    "search": "بحث"
   },
   "product": {
     "name": "اسم المنتج",

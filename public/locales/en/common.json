@@ -31,7 +31,8 @@
     "profileSettings": "Profile Settings",
     "favorites": "Favorites",
     "shopItems": "Shop Some Items",
-    "proceedToCheckOut": "Proceed To Check Out"
+    "proceedToCheckOut": "Proceed To Check Out",
+    "search": "Search"
   },
   "product": {
     "name": "Name",
