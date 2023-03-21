@@ -15,7 +15,7 @@ export default function OurProducts() {
   return (
     <Box>
       <Box p="2rem" backgroundColor="primary.main">
-        <Typography variant="h2" component="h2" color="secondary.light">
+        <Typography variant="h2" component="h2" color="text.header">
           {t("home.socially")}
         </Typography>
       </Box>
@@ -79,13 +79,13 @@ export default function OurProducts() {
           })}
       </Stack>
       <Box p="2rem" backgroundColor="primary.main">
-        <Typography variant="h2" component="h2" color="secondary.light">
+        <Typography variant="h2" component="h2" color="text.header">
           {t("home.madeOf1")}
         </Typography>
         <Typography
           variant="h5"
           component="article"
-          color="secondary.light"
+          color="text.header"
           mt="2rem"
         >
           {t("home.madeOf2")}

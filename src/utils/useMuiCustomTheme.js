@@ -72,6 +72,7 @@ function useMuiCustomTheme() {
                 text: {
                   primary: "#123026",
                   secondary: "#123026",
+                  header: "#DDABAE",
                 },
                 // divider: amber[200],
               }
@@ -99,6 +100,7 @@ function useMuiCustomTheme() {
                 text: {
                   primary: "#fff",
                   secondary: "gray",
+                  header: "gray",
                   disabled: "#123026",
                 },
               }),

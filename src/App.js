@@ -26,6 +26,7 @@ import utc from "dayjs/plugin/utc";
 
 import { useStore } from "./store/useStore";
 import Checkout from "./features/Cart/Checkout";
+import NotFound404 from "./features/notFound404/NotFound404";
 
 const MainLayout = lazy(() => import("./layouts/MainLayout"));
 const HomePage = lazy(() => import("./features/homePage/HomePage"));
@@ -75,6 +76,7 @@ function App() {
           />
           <Route path="/shopall" element={<Store pageTitle={"shopAll"} />} />
           <Route path="/values" element={<Values />} />
+          <Route path="*" element={<NotFound404 />} />
         </Route>
       </>
     )

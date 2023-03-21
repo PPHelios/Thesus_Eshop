@@ -24,7 +24,10 @@ ${require(`../../assets/images/valuesHero,w_1280.webp`)} 1280w`}
           src={require(`../../assets/images/valuesHero,w_1280.webp`)}
           alt="a girl enjoing the sun in the fields"
           width="100%"
-          sx={{ minHeight: { xs: "210px", md: "470px" } }}
+          sx={{
+            minHeight: { xs: "210px", md: "470px" },
+            filter: "brightness(80%)",
+          }}
         />
         <XyzTransition appear duration="auto" xyz="fade up delay-5 duration-30">
           <Stack
@@ -37,7 +40,6 @@ ${require(`../../assets/images/valuesHero,w_1280.webp`)} 1280w`}
             height="100%"
             color="white"
             textAlign="center"
-            backgroundColor="rgba(0,0,0,0.4)"
             sx={{ top: { xs: "2vw", sm: "-12vw" } }}
           >
             <Typography
@@ -51,7 +53,7 @@ ${require(`../../assets/images/valuesHero,w_1280.webp`)} 1280w`}
             </Typography>
             <Typography
               as="p"
-              sx={{ fontSize: { xs: "0.8rem", sm: "calc(0.2rem + 1vw)" } }}
+              sx={{ fontSize: { xs: "1rem", sm: "calc(0.3rem + 1vw)" } }}
             >
               {t("store.storeBootsHeroSub")}
             </Typography>
