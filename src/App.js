@@ -30,8 +30,8 @@ import NotFound404 from "./features/notFound404/NotFound404";
 
 const MainLayout = lazy(() => import("./layouts/MainLayout"));
 const HomePage = lazy(() => import("./features/homePage/HomePage"));
-const Signup = lazy(() => import("./features/authentication/Signup"));
-const Login = lazy(() => import("./features/authentication/Login"));
+const Signup = lazy(() => import("./features/Authentication/SignUp"));
+const Login = lazy(() => import("./features/Authentication/Login"));
 const Store = lazy(() => import("./features/store/Store"));
 const Values = lazy(() => import("./features/values/Values"));
 
