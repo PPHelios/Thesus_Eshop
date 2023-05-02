@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
@@ -20,7 +19,6 @@ function BeOutside() {
   const {
     handleSubmit,
     control,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {

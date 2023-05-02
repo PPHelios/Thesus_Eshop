@@ -17,7 +17,6 @@ export const productsSlice = (set, get) => ({
       alt: "blue Weekend Boot",
       category: "Weekend Boot",
       rating: 4,
-      rating: 4,
       stock: [
         { size: 37, quantity: 0 },
         { size: 38, quantity: 3 },
@@ -47,7 +46,6 @@ export const productsSlice = (set, get) => ({
       img: "weekendBootIndigo",
       alt: "weekend Boot Indigo",
       category: "Weekend Boot",
-      rating: 4,
       rating: 4,
       stock: [
         { size: 37, quantity: 3 },
@@ -349,7 +347,10 @@ export const productsSlice = (set, get) => ({
         "PUT",
         { formData }
       );
-      set((state) => ({ products: newProductsList }));
+      if(data){
+              set((state) => ({ products: newProductsList }));
+
+      }
     } catch (err) {
       set((state) => ({ products: productsBeforeSubmit }));
       throw new Error(err.message);

@@ -148,7 +148,7 @@ function useMuiCustomTheme() {
           },
         },
       }),
-    [colorMode]
+    [colorMode,docDir]
   );
 
   theme = responsiveFontSizes(theme);

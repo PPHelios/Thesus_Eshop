@@ -102,7 +102,7 @@ function Navbar() {
   ];
 
   const navItems = navLinks.map((item) => {
-    const menuItems = item?.links?.map((subItem) => {
+    const menuItems = item?.links?.map((subItem) => { // eslint-disable-line
       if (subItem.show) {
         return (
           <ListItem

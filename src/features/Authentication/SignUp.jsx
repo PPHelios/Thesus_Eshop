@@ -78,7 +78,7 @@ function Signup() {
       .min(5, t("formErrors.fieldMin", { val: "5" }))
       .max(20, t("formErrors.fieldMax", { val: "20" }))
       .matches(
-        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, // eslint-disable-line
         t("formErrors.notValid", { val: "Phone Number" })
       ),
     gender: yup.string().required(t("formErrors.fieldRequired")),

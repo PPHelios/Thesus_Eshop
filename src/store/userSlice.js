@@ -73,7 +73,10 @@ export const userSlice = (set, get) => ({
         "PUT",
         { formData }
       );
-      set((state) => ({ allUsers: newusersList }));
+      if (data){
+              set((state) => ({ allUsers: newusersList }));
+
+      }
     } catch (err) {
       set((state) => ({ allUsers: usersBeforeSubmit }));
       throw new Error(err.message);
@@ -165,7 +168,7 @@ export const userSlice = (set, get) => ({
       );
     }
     try {
-      const updatedCart = await get().updateDbCart({
+       await get().updateDbCart({
         userId: get().user._id,
         cart: get().user.cart,
       });
@@ -183,7 +186,7 @@ export const userSlice = (set, get) => ({
       })
     );
     try {
-      const updatedCart = await get().updateDbCart({
+       await get().updateDbCart({
         userId: get().user._id,
         cart: get().user.cart,
       });
@@ -209,7 +212,7 @@ export const userSlice = (set, get) => ({
       deleteItem(itemId);
     }
     try {
-      const updatedCart = await get().updateDbCart({
+       await get().updateDbCart({
         userId: get().user._id,
         cart: get().user.cart,
       });
@@ -230,7 +233,7 @@ export const userSlice = (set, get) => ({
       })
     );
     try {
-      const updatedCart = await get().updateDbCart({
+       await get().updateDbCart({
         userId: get().user._id,
         cart: filteredCartItems,
       });

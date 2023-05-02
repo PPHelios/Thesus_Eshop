@@ -24,7 +24,7 @@ import "dayjs/locale/ar";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
-import { useStore } from "./store/useStore";
+// import { useStore } from "./store/useStore";
 import Checkout from "./features/Cart/Checkout";
 import NotFound404 from "./features/notFound404/NotFound404";
 

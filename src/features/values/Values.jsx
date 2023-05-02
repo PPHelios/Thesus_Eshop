@@ -1,11 +1,8 @@
 import { useTranslation } from "react-i18next";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import ProductCard from "../../components/ProductCard/ProductCard";
 import Stack from "@mui/material/Stack";
 import { Img } from "../../components/muiStyledComponents/muiStyledComponents";
-import { useStore } from "../../store/useStore";
-import { XyzTransitionGroup } from "@animxyz/react";
 import { XyzTransition } from "@animxyz/react";
 import "@animxyz/core";
 

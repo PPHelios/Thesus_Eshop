@@ -15,11 +15,10 @@ function Login() {
   const { t } = useTranslation("common");
   const login = useStore((state) => state.login);
   const loggedInUser = useStore((state) => state.user?.firstName);
-  const navigate = useNavigate();
+   const navigate = useNavigate();
   const {
     handleSubmit,
     control,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -35,7 +34,7 @@ function Login() {
       const loggedIn = await login(data);
       if (loggedIn) {
         setSubmitting(false);
-        // navigate("/")
+         navigate("/")
       }
     } catch (err) {
       setError(err.message);
