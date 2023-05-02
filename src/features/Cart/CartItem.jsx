@@ -37,12 +37,12 @@ function CartItem({ item, direction = "column" }) {
           justifyContent="stretch"
           alignItems="center"
         >
-          <Grid item xs={12}>
+          <Grid item >
             <Typography variant="body1">
               {lang === "rtl" ? item.nameAr : item.name}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item >
             {item.discountPercentage > 0 && (
               <Typography
                 variant="body1"
@@ -53,12 +53,12 @@ function CartItem({ item, direction = "column" }) {
               </Typography>
             )}
           </Grid>
-          <Grid xs={12}>
+          <Grid >
             <Typography variant="body1">
               {discountedPrice} ({discountedPrice * item.quantity})
             </Typography>
           </Grid>
-          <Grid xs={12}>
+          <Grid >
             <Stack
               p={0.5}
               direction="row"

@@ -1,4 +1,4 @@
-import { Suspense, useEffect, lazy } from "react";
+import { Suspense, useEffect, lazy, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Route,
@@ -24,7 +24,7 @@ import "dayjs/locale/ar";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
-// import { useStore } from "./store/useStore";
+import { useStore } from "./store/useStore";
 import Checkout from "./features/Cart/Checkout";
 import NotFound404 from "./features/notFound404/NotFound404";
 
@@ -39,10 +39,34 @@ dayjs.extend(utc);
 
 function App() {
   const theme = useMuiCustomTheme();
-  // const getProducts = useStore((state) => state.getProducts);
-  // useEffect(() => {
-  //   getProducts();
-  // }, []);
+
+// backend server //////////////////////////////////////////////////////
+  const getProducts = useStore((state) => state.getProducts);
+  const sync = useStore((state) => state.sync);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
+
+  useEffect(() => {
+    sync();
+  }, [sync]);
+
+  const syncLogout = useCallback((event) => {
+    if (event.key === "logout") {
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("storage", syncLogout);
+    return () => {
+      window.removeEventListener("storage", syncLogout);
+    };
+  }, [syncLogout]);
+
+///////////////////////////////////////////////////////////////////////////
+
   const { i18n } = useTranslation();
   useEffect(() => {
     document.dir = i18n.dir();
