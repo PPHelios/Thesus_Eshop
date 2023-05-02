@@ -131,38 +131,7 @@ ${require(`../../assets/images/terrusClogsHero,w_1280.webp`)} 1280w`}
           </XyzTransition>
         </Box>
       )}
-      {!pageProduct && (
-        <Box as="main" position="relative">
-          <Stack
-            position="absolute"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            left={0}
-            width="100%"
-            height="100%"
-            color="white"
-            textAlign="center"
-            sx={{ top: { xs: "2vw", sm: "-12vw" } }}
-          >
-            <Typography
-              as="h2"
-              sx={{
-                fontSize: { xs: "1.6rem", sm: "calc(2rem + 4vw)" },
-                fontWeight: "700",
-              }}
-            >
-              {t("store.storeClogsHero")}
-            </Typography>
-            <Typography
-              as="p"
-              sx={{ fontSize: { xs: "0.8rem", sm: "calc(0.2rem + 1vw)" } }}
-            >
-              {t("store.storeClogsHeroSub")}
-            </Typography>
-          </Stack>
-        </Box>
-      )}
+   
       <Box p="1rem">
         <Stack mt={2} mb={7} spacing={1} alignItems="center">
           <Typography variant="h2" width="90%" textAlign="center">

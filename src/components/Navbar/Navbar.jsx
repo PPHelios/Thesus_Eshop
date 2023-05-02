@@ -148,7 +148,6 @@ function Navbar() {
         disablePadding
         href={item.link}
         color="text.primary"
-        onClick={() => setMobileDrawerOpen(false)}
       >
         <ListItemButton sx={{ textAlign: "center" }}>
           <ListItemText primary={t(`nav_bar.${item.label}`)} />
